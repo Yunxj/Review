@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    /*
+    一. Ajax的原生写法
+    	document.getElementById('uname').onblur = function(){
+	  	var name =this.value;
+        // 第一步：创建对象：能向服务器发送数据
+	  	var xhr = new XMLHttpRequest()
+        // 第二步：准备数据
+        var param = 'username=' + username + '&password=' + password; 键值中间是=的形式
+        get的参数传递
+        xhr.open("get","./demo02.php?" + encode(param),true); true 表示异步 encode转码防止乱码
+        //post请求需要设置请求头,get不需要
+          xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        直接获取表单中的数据
+        var myform = document.querySelector('#myform')
+        var formInfo = new FormData(myform)
+        // 第三步：发送数据
+        get的请求,不用传递数据
+        xhr.send(null)
+        post的请求
+          xhr.send(param); post请求用send传递参数
+          xhr.send(formInfo) 表单的数据
+	  	// 第四步：接收从服务器端传递回来的数据
+	  	xhr.onreadystatechange = function(){
+	  		if(xhr.readyState == 4 && xhr.status == 200){
+	  			var data = xhr.responseText;  返回字符串类型数据
+	  			var data = xhr.responseXHL;  返回XHL类型数据 (不常用)
+	  			var info = document.getElementById('info');
+	  			info.innerHTML = data;
+	  		}
+	  	}
+        
+        xhr对象的相关属性
+        xhr.readyState(0 1 2 3 4) 0对象初始化 1执行发送动作 2服务器端数据已经完全返回 3数据正在解析 
+                                  4 数据解析完成，可以使用了 (重点)
+        xhr.status  200 数据相应正常   404 没有找到资源    500 服务器端错误
+    二. 字符串拼接渲染页面数据原生 (豆豆加加)
+        var res = xhr.responseText;  ajax获得的字符串形式的响应数据
+        // JSON.parse()  js中将json格式的字符串转换为数组
+        var arr = JSON.parse(res);
+        var html = "";
+        arr.forEach(function(value,index){
+            html +='<li>'
+            html +=    '<a href="#">'
+            html +=        '<img src="'+value.src+'" alt="">'
+            html +=        '<p>'+value.text+'</p>'
+            html +=    '</a>'
+            html +='</li>'
+        })
+        document.querySelector('ul').innerHTML = html;
+    三. JSON数据 (键值对,双引号)
+        JSON.stringify() 对象或数组转换为JSON格式的字符串
+        JSON.parse()     反之
+        
+    四. 事件队列的大概三种情况
+        1. 定时器
+            setTimeout(function(){})
+            setInterval(function(){})
+            console.log(1);
+            setTimeout(function(){
+                console.log(2)
+            })
+            console.log(3)
+            打印 1  3  2
+        2. 事件函数
+        btn.onclick = function () {
+            
+        }
+        3. ajax回调函数
+            xhr.onreadystatechange = function () {
+                
+            }
+    五. jquery中ajax的使用
+        $.ajax({
+            url:'',
+            type:'',
+            data:{} 或 $('#form').serialize(),
+            dataType:'json' 或 'text',
+            beforeSend: function () {  
+                if(name.trim() == "") {
+                    return alert('输入的内容不能为空')
+                }
+            },
+            success: function (res) { 
+                $('ul').html(template('temInfo', res))
+            },
+            error: function (err) {  
+                console.log(err)
+            }
+        })
+    六.Ajax的跨域问题同源策略 协议 域名/IP 端口 (JSONP, CORS)
+        1.原生支持静态跨域 (不支持动态的传递参数)
+            <script src="http://xxx.com/xx.js"> <script>
+        2. JSONP (动态创建script标签,通过src来发送请求)
+            function foo(data) {   申明一个函数
+                console.log(data)
+            }
+            在服务器端返回一个函数调用
+                echo 'foo(123)'
+                这个返回的函数调用就是jsonp
+            var script = document.createElement('script')
+            script.src = 'http://xxx.com/xx.js=' + flg
+            var head = document.querySelector('head')
+            head.appendChild(script)
+            只有当数据返回时，而且返回的是函数调用，才会执行函数，进入函数体内部执行代码。
+    七. 模板引擎的使用
+        success返回的数据, 遍历的方法
+        原生H5C3的方法
+        <% data.forEach(item=>{ %>
+            <%= item.name%>
+        <% }) %>
+            简化版的方法
+        {{ each data}}
+            {{$value.name}}
+        {{/each}}
+    八. 使用Ajax查询天气
+        $.ajax({
+            type:"get",
+            url:"http://api.map.baidu.com/telematics/v3/weather",
+            data:{
+                "ak":"zVo5SStav7IUiVON0kuCogecm87lonOj",
+                "location":"武汉|北京",
+                "output":"json"
+            },
+            dataType:"jsonp",
+            success:function(result){
+                var html = template("weaTemp",result);
+                $("tbody").html(html);
+            }
+        })
+    
+    
+    
+    
+    
+    
+    */
+
+</script>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <table border="1">
+        <thead> 
+            <tr>   
+                <th>date</th>
+                <th>dayPictureUrl</th>
+                <th>nightPictureUrl</th>
+                <th>temperature</th>
+                <th>weather</th>
+                <th>wind</th>
+            </tr>
+        
+        </thead>
+        <tbody> 
+           <!-- 渲染查询到天气数据 -->
+        </tbody>
+
+    </table>
+    <script src="jquery.js"></script>
+    <script src="template-web.js"></script>
+    <script type="text/template" id="weaTemp">
+        {{each results[0].weather_data}}
+        <tr>
+            <td>{{$value.date}}</td>
+            <td><img src="{{$value.dayPictureUrl}}" alt=""></td>
+            <td><img src="{{$value.nightPictureUrl}}" alt=""></td>
+            <td>{{$value.temperature}}</td>
+            <td>{{$value.weather}}</td>
+            <td>{{$value.wind}}</td>
+        </tr>
+        {{/each}}
+    </script>
+    <script>
+        $.ajax({
+            type:"get",
+            url:"http://api.map.baidu.com/telematics/v3/weather",
+            data:{
+                "ak":"zVo5SStav7IUiVON0kuCogecm87lonOj",
+                "location":"武汉|北京",
+                "output":"json"
+            },
+            dataType:"jsonp",
+            success:function(result){
+                console.log(result);
+                //result就是对象
+//             var html = template("weaTemp",{items:result.results[0].weather_data
+// })
+                var html = template("weaTemp",result);
+                $("tbody").html(html);
+            }
+        })
+    
+    </script>
+</body>
+</html>
