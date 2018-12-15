@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    /*
+    一. 继承性 (js的设计模式)
+        1.对象的继承 
+            var parent = {
+              name: '王健林',
+              age: 60,
+              house: '别墅',
+              money: 1000000,
+              car: '玛莎拉蒂',
+              play: function () {console.log('弹吉他');}
+            };
+            var child = {
+              name: '王思聪',
+              age: 18
+            };
+             function extend(child, parent) {
+              for (var key in parent) {
+                if (child[key]) continue;   如果child中有该成员，不替换成parent对象中的成员
+                child[key] = parent[key];
+              }
+            }
+            把parent对象的所有成员 拷贝到 child对象上 （实现继承）
+            extend(child, parent);
+        2.原型继承 (原型继承的问题：无法给构造函数传参);
+        3.借构造函数继承 (借用构造函数继承问题：无法重用方法)
+            function Person(name,age,sex) { 父类
+                this.name = name;
+                this.age = age;
+                this.sex = sex;
+            }
+            function Student(name,age,sex,score) { 子类
+                Person.call(this,name,age,sex);
+                //相当于this.Person(name,age,sex);
+                this.score = score;
+            }
+            var s1 = new Student("张三",18,"男",100);
+            console.log(s1);
+        4.组合式继承 (结合原型继承和组合式继承)
+        function Person(name,age,gender) {父类
+            this.name = name;
+            this.age = age;
+            this.gender = gender;
+        }
+        Person.prototype.eat = function () {
+            console.log("大家好,我是");
+        }
+        function Student(name,age,gender,score) {  子类
+            Person.call(this,name,age,gender);
+            this.score = score;
+        }
+        Student.prototype = new Person(); //改变构造函数的原型指向
+        Student.prototype.constructor = Student; //因改变了指向,此时Student.prototype中没有consructor属性,需要重新指定
+        Student.prototype.exam = function () {
+        }
+        var s1 = new Student("zs",18,"男",100);
+        var s2 = new Student();
+        console.log(s1);
+    二. bind call 
+        bind(); 改变this的指向,并返回一个新的函数,不能调用函数
+        call(null, x, y);第一个参数是null函数调用
+    三. 函数的四种调用模式
+        1.函数模式
+        function foo(x, y){
+            console.log(this);
+        }
+        foo();
+        2.方法模式
+        var o = {
+            name: "zhangsan"
+        }
+        o.foo = foo;
+        o.foo(); 宿主
+        3.构造器模式
+        var f = new foo();
+        console.log(f)
+        4.上下文调用模式 call apply
+        foo.call(o, 1, 2)=> o.foo    foo.call(null) =>foo();
+        foo.apply(o, [1, 2]);
+        foo();
+        o.foo = foo;
+        o.foo();
+        foo.call(null, 1, 2); foo(1, 2)
+
+        bind(); 改变this的指向,并返回一个新的函数,不能调用函数
+        var fn = foo.bind(o);
+        fn()  相当于o.foo()
+   
+    四. 函数的创建类型
+        函数声明式
+        function foo(){
+            console.log(123)
+        }
+        函数表达式
+        var fn = function (){
+            console.log(456)
+        }
+        fn();
+        由Functon创建的函数 (在构造函数顶层时,是new的实例化也是构造函数)
+            1.最后一个参数是创建出来的函数的函数体
+            2.最后一个参数前的参数作为创建出来的函数的形参
+        function sum(a,b) {
+            console.log((a + b));
+        }
+        sum(2, 3);    
+        注意:Function中的参数都是字符串形式
+        sum1是函数,也是对象,说明:函数也是对象
+        var sum1 = new Function("a","b","console.log(a + b)");
+        sum1(1 ,3);
+    
+    
+    
+    
+    
+    
+    */
+
+
+
+</script>
+</html>

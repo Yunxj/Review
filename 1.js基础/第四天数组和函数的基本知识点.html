@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>    
+    /*
+        1.创建数组的方式 数组的(length长度 index索引号 for遍历 )
+        1)new Array() new 一个数组的对象
+        var arr = new Array(); 
+        定义一维数组
+            方法1：
+            var _TheArray = new Array);/定义
+            _TheArray[0]="1";
+            _TheArray[1]="2";
+            _TheArray[2]="3";//初始化
+
+            方法2：
+            var _TheArray = new Array("1","2","3");//直接定义并初始化
+        定义二维数组
+            方法1
+            var _TheArray = new Array();   //先声明一维
+            for(var i=0;i<10;i++){        //一维长度为10
+                TheArray[i]=new Array();    //在声明二维
+                for(var j=0;j<20;j++){      //二维长度为20
+                 _TheArray[i][j]=1;
+                }
+            }
+            方法2
+            var _TheArray = [["0-1","0-2"],["1-1","1-2"],["2-1","2-2"]];//直接定义并初始化
+        2)字面量创建数组 []
+        var arr = [1 , 2, 3, 4];
+        3)获取数组中的值
+        arr[0] 索引号 只有一种方法
+
+        2.arr[索引号] = '要添加的值' 添加
+        var arr = [1 ,2 ,3]
+        arr.length = 5;         
+        console.log(arr[3],arr[4])是undefined      
+
+        3.求数组的 和 平均值 最大值 最小值 
+        var arr = [2, 5, 1, 7, 9, 0];
+        var sum = 0;
+        for (var i = 0; i < arr.length; i++) {
+            sum += arr[i];
+        } 和  
+        var arr = [2, 5, 1, 7, 9, 0];
+        var max = arr[0];
+        a方法.  for(var i = 0; i < arr.length; i++) {
+                    max = max > arr[i] ? max : arr[i];
+                }  最大值 
+        b方法.  for (var i = 1; i < arr.length; i++) {
+                    if (max < arr[i]) {
+                        //如果进来了,说明你假设错了
+                        max = arr[i];
+                    }
+                }
+                
+        4. 数组的数据 去0 ,筛选如大于10的数, 翻转数组
+        去0 和 筛选 类似
+        var arr = [21, 15, 6, 1, 77, 0, 52, 0, 25, 7];
+        var newArr = [];
+        for (var i = 0; i < arr.length; i++) {
+            if (arr[i] != 0 ) { 去0    arr[i] >= 10 筛选
+                newArr[newArr.length] = arr[i];
+            }
+        }
+        var newArr = arr.reverse() 翻转数组的方法         
+        方法一 翻转数组
+        var arr = ['red', 'green', 'blue', 'pink', 'purple'];
+        var newArr = [];
+        for (var i = 0; i < arr.length; i++) {   
+            newArr[newArr.length] = arr[arr.length - i - 1]
+        } 
+        方法二 翻转数组
+        for (var i = arr.length - 1; i >= 0; i--) {  
+            newArr[newArr.length] = arr[i]; 反向遍历
+        }
+
+        5.冒泡排序 
+        var arr = [21, 15, 6, 1, 77, 0, 52, 0, 25, 7];
+        方法一 sort方法传入函数
+        var newArr = arr.sort(function (a, b) {
+            return a - b; //升序    return b - a; 降序
+        });
+        方法二 双重for循环遍历
+        var arr = [21, 15, 6, 1, 77, 0, 52, 0, 25, 7];
+        var inner = 0; 记录比较的次数
+        var outer = 0; 记录比较的趟数
+        for (var i = 0; i < arr.length - 1; i++) { 外循环趟数是固定的
+            var flag = true; 假设这是一个已经排好的数组
+            for (var j = 0; j < arr.length - i - 1; j++) { 内循环次数不固定可以根据当前数组要比较大小的个数来优化
+                if (arr[j] > arr[j + 1]) {  >大于号 升序  <小于号降序
+                    flag = false;
+                    var temp = arr[j]   遍历 互换 
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                }
+                inner++
+            }
+            outer++
+            if(flag){
+                break;
+            }
+        }
+  
+    函数 痛点 大量重复使用 把要(重复的代码块) 进行封装-->>类似打包  就可以调用
+    注意事项:
+        a.函数不调用,自己不执行  自调用函数也是有调用 自己调用自己
+        b.调用函数 fn() 不要忘了括号()
+        c.一次声明函数,可以调用多次
+    function fn() {
+
+    };
+
+    1.封装1 到 n 和的函数
+    function getSum(start, end){
+        var sum = 0;
+        for (var i = start; i < end; i++){
+            sum += i;
+        }
+        return sum
+    }
+    getSum(1 , 50);
+    getSum(20 , 70);
+
+    2.带有参数的函数
+    function fn(形参1,形参2) {
+        console.log(形参1 + 形参2)
+    }
+    fn(实参1,实参2)
+    当实参和形参 数量不匹配时
+    形参 > 实参时, 多出来的形参没有接受到值 那么就是undefined
+    实参 > 形参时, 多出来的实参没有人接受 就废掉了
+     function fn(a, b) {
+         console.log(a + b);
+     }
+     fn(1 , 2); 3
+     fn(2); NaN
+     fn(2, 3 ,4) 5
+
+
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    */
+
+</script>
+</html>

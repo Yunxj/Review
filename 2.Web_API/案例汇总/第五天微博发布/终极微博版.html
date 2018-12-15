@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0
+        }
+
+        ul {
+            list-style: none;
+            margin-top: 30px;
+        }
+
+        .box {
+            width: 600px;
+            margin: 100px auto;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            padding: 20px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 68px;
+            outline: none;
+            resize: none;
+        }
+
+        ul {
+            width: 450px;
+            padding-left: 80px;
+        }
+
+        ul li {
+            line-height: 25px;
+            border-bottom: 1px dashed #ccc;
+            word-break: break-all;/*自动换行*/
+        }
+
+        .title {
+            float: left;
+        }
+
+        .num {
+            float: right;
+        }
+
+        .input {
+            margin-top: 4px;
+            padding: 5px;
+        }
+
+        .func {
+            float: right;
+        }
+
+        #btn {
+            display: inline-block;
+            height: 28px;
+            line-height: 29px;
+            width: 60px;
+            min-width: 40px;
+            font-size: 14px;
+            background-color: #ff8140;
+            color: #fff;
+            box-shadow: none;
+            cursor: default;
+            border: 1px solid #f77c3d;
+            outline: none;
+            padding: 0 10px;
+            border-radius: 2px;
+            text-align: center;
+        }
+
+        input {
+            float: right;
+        }
+    </style>
+</head>
+<body>
+<div class="box" id="weibo">
+    <div>
+        <div class="title">有什么新鲜事想告诉大家</div>
+        <div class="num">还可以输入<span id="num">140</span>字</div>
+    </div>
+    <div style="clear: both"></div>
+    <div class="input">
+        <textarea name="" id="txt" cols="20" rows="10" maxlength="140"></textarea>
+    </div>
+    <div class="func">
+        <a id="btn">发布</a>
+    </div>
+    <div style="clear: both"></div>
+    <ul id="ul"></ul>
+    <div></div>
+</div>
+<script>
+    //找人
+    var text = document.getElementById("txt");
+    var btn = document.getElementById("btn");
+    var ul = document.getElementById("ul");
+    var num = document.getElementById("num");
+    //点击按钮 获取文本域中的内容 动态创建结构
+    btn.onclick = function (e) {
+        //1.如果用户没有输入内容 不应该发布
+        if (text.value === "") {//没输入
+            alert("还没输入呢，发布什么呀");
+            return;//后续代码就不执行了
+        }
+        if (text.value.indexOf("草") != -1 || text.value.indexOf("黄鳝") != -1) {
+            text.value = "开门，查水表***"
+        }
+        var li = document.createElement("li");
+        //li的顺序 要注意
+        //如果一个都没有 就appendChild
+        //如果前面有了 就应该插入到最前
+        var lis = ul.children;
+        if (lis.length === 0) {
+            ul.appendChild(li);
+        } else {
+            ul.insertBefore(li, lis[0]);//lis[0]是当前最开始的
+        }
+        //把文本放到一个span里
+        var span = document.createElement("span");
+        li.appendChild(span);
+        span.innerText = text.value;//把文本域中的内容放到span中
+        //用户输入的东西不确定 最好用innerText 使用innerText要注意兼容问题
+        //2.内容发布后 文本域中的内容应该清空
+        text.value = "";
+        //发布完后数字归为
+        num.innerText = calc;
+        //添加删除按钮
+        var del = document.createElement("input");//创建删除按钮
+        del.type = "button";
+        del.value = "删除";
+        li.appendChild(del);
+        //点击删除按钮 把当前li删掉
+        del.onclick = function () {
+            ul.removeChild(this.parentNode);
+        };
+
+    };
+
+    //还可以输入140字
+    var calc = parseInt(num.innerText);
+    text.onkeyup = function () {
+        if (text.value.length <= calc) {
+            num.innerText = calc - this.value.length;
+        }
+    };
+
+    text.onfocus = function () {
+        text.style.color = "#333";
+        text.style.border = "1px solid #f77c3d";
+    };
+    text.onblur = function () {
+        text.style.color = "#808080";
+        text.style.border = "1px solid #ccc";
+    };
+</script>
+</body>
+</html>

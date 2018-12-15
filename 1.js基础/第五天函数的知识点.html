@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    /*
+    函数(是一种数据类型 function)就是封装一段可以重复调用执行的代码块 
+    大部分情况,函数需要返回值 
+    1. 函数的返回值 return   
+        语法格式
+    function fn() {
+         return 返回的值(可以是 变量 值 对象 函数 运算式 等);
+    }
+    fn(); 调用
+     注意点 
+        1)return 除了是返回值 还能终止函数
+        2)return 只能返回一个值
+        3)函数没有return, 调用这个函数,打印结果是undefined
+
+    2.两个综合案例
+    1) 写一个函数 要求：输入某年某月某日，判断这一天是这一年的第几天？
+       2018,1,2   过了2天了 
+       2018,2,2   过了33天了 
+       案例的核心思想 ：  首先第一步求出 当前月份的天数   在累加前面 月份的天数 
+       难点  每个月分的天数不一样  1,3,5,7,8,10,12  每月是31天  4,6,9,11 他们是 30天 
+       2月份  闰年是 29天   平年是 28
+    function isRun(year) {
+        var flag = false;
+        if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0) {
+            flag = ture;
+        }
+        return flag;
+    }
+
+    function sumDays(year, month, day) {
+        var days = day;
+        for (var i = 1; i < month; i++) {
+            switch (i) {
+                // case 值 :  
+                //此处简写 把满足条件的放在一类  执行时直接跳转到满足要求的数值
+                //case 12:
+                //days += 31;
+                //break;
+                case 1:
+                case 3:
+                case 5:
+                case 7:
+                case 8:
+                case 10:
+                case 12:
+                    days += 31;
+                    break;
+                case 4:
+                case 6:
+                case 9:
+                case 11:
+                    days += 30;
+                    break;
+                case 2:
+                    if (isRun(year)) {
+                        days += 29;
+                    } else {
+                        days += 28;
+                    }
+            }
+        }
+        return days;
+    }
+    console.log(sumDays(2018,3,3));
+    2) 1，1，2，3，5，8，13，21   求第9个数字是多少(可选) 兔子数列 斐波那契数列
+    function fn(num) {
+        var n1 = 1;
+        var n2 = 1;
+        var n3;
+        for (var i = 3; i <= num; i++) {
+            //变量交互
+            n3 = n1 + n2;
+            n1 = n2;
+            n2 = n3;
+        }
+        return n3
+    }
+    console.log(fn(9));
+
+    3.arguments(实参) arguments.length为函数实参个数，arguments.callee引用函数自身  
+      1)当不确定实参是多少时,通过arguments 存储传递过来的实参
+      2)是个伪数组, 有长度length 有索引号 没有数组一些方法 push pop
+        function fn() {  
+            var sum =0;
+            for(var i = 0; i < arguments.length; i++) {
+                sum += arguments[i];
+            }
+            return sum;
+        }
+        console.log(fn(2,3,4,6))
+
+    4.函数的两种定义方式
+    1) 函数关键字自定义(命名函数) function fn() {}   fn();
+    2) 函数表达式定义(匿名函数) var fun = function (){}; fun(); (函数调用写在下方);
+
+    5.自调用函数 写法  (function () {})()
+        (function () {
+            console.log('我是只执行函数');
+        })()
+
+    6.作用域 (全局作用域  局部作用域)
+    全局变量 浏览器关闭销毁
+    局部变量 作用在函数内部 函数执行完 数据销毁
+    作用域链 案例
+        var a = 1;
+        function fn1() {
+            var a = 2;
+            var b = '22';
+            fn2();
+            function fn2() {
+                var a = 3;
+                fn3();
+                function fn3() {
+                    var a = 4;
+                    console.log(a); //a的值 4
+                    console.log(b); //b的值 22
+                }
+            }
+        }
+        fn1();
+
+        7.预解析(重点)  变量 函数 
+        1)把所有的 var function 提升到当前作用域的最前面
+            变量提升 只提升声明 不提升赋值
+            函数提升 提升的是整体不调用
+        2)从上往下执行代码
+        var a = 18;
+        f1();
+        function f1() {
+            var b = 9;
+            console.log(a);
+            console.log(b);
+            var a = '123';
+        }
+        相当于执行了以下代码
+        var a;
+        function f1() {
+            var b;
+            var a;
+            b = 9;
+            console.log(a); // undefined
+            console.log(b); // 9
+            a = '123';
+        }
+
+        8. 变量名 和 函数名冲突
+        console.log(a); //a 的函数体 函数在js中是一等公民,冲突时优先执行函数
+        var a = 1;
+        console.log(a); 1 已经赋值
+        function a() {
+            return false;
+        }
+
+    
+    
+    */  
+
+
+    
+</script>
+
+</html>

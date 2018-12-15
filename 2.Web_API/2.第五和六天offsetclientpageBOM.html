@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    /*
+    一. BOM 浏览器对象模型(顶级对象是window),比如：刷新浏览器、后退、前进、在浏览器中输入URL等
+      1)alert()警示对话框  prompt()输入对话框  confirm()确认对话框
+      2)window.onload  onunload 页面加载
+      3)setTimeout() setInterval() 定时器  清除定时器  clearTimeout()  clearInterval()
+      4)location 获取和设置浏览器地址栏的URL
+        location.href = 'http://www.itheima.com';
+        assign() 的作用和href的作用一样。可以让页面跳转到指定的地方
+        location.assign('http://www.itheima.com');替换掉地址栏中的地址，但是不记录历史       
+        location.replace('http://www.itheima.com');
+        location.reload(true);参数:true 强制从服务器获取页面,false  如果浏览器有缓存的话，直接从缓存获取页面
+        重新加载 refresh f5  刷新页面，可能从缓存中加载   control+f5 强制刷新  从服务器获取页面
+      5)history 历史
+        history.forward(); history.go(1); 前进
+        history.back(); history.go(-1); 后退
+        history.go(0); 刷新
+    二. offset client scroll
+        offsetParent 获取距离当前元素最近的定位父元素,没有定位就是body;
+        box.offsetLeft  box.offsetTop 获取位置
+        box.offsetWidth box.offsetHeight 包括:边框和padding
+        box.clientLeft  box.clientTop 获取的是box的左和上边框 
+        box.clientWidth box.clientHeight 包括padding,不包括边框,不包括滚动条
+        box.scrollLeft  box.scrollTop box滚动出去的距离
+        box.scrollWidth box.scrollHeight 内容大小:padding+未显示的内容,不包括滚动条
+        滚动条的高度 / scroll的高度 = box的高度 / 内容的高度
+        offsetHeight     元素的大小 + padding + border
+        clientHeight     元素的大小 + padding
+        scrollHeight     内容的大小 + padding
+    三. 鼠标事件
+        mouseenter   mouseleave     不会触发事件冒泡
+        mouseover    mouseout       会触发事件冒泡   
+
+    四. 案例 弹出层 (点击事件,js的style属性设置)
+            放大镜 (围绕page offset client scroll的案例 mask是放大镜
+            mask移动的距离 / mask最大能够移动的距离  = 大图片移动的距离 / 大图片最大能够移动的距离
+                    )
+            模拟滚动条 (围绕page offset client scroll的案例
+             内容滚动的距离 / 内容最大能够滚动的距离 = 滚动条滚动的距离 / 滚动条最大能够滚动的距离
+            )
+        老师增加的案例
+        微博发布和许愿墙
+
+
+第六天总复习Web_API基本知识点 (都是案例综合知识点)
+    一. 动画的练习和封装
+        1)步长 + 定时器的执行函数 + 判断条件;封装成函数
+    二. 原生JS轮播图(无缝滚动) 重难点
+        1)动态生成序列号 cleateElement(); appendChild
+        2)li.setAttribute('index', i); var liIndex = parseInt(this.getAttribute('index'));
+        3)先清除定时器,再开启定时器
+        4)克隆var cloneLi = firstLi.cloneNode(true);ul.appendChild(cloneLi);
+    三. 回到顶部 (两个样式,js获取scriollTop滚动的距离,判断范围添加和删除类名)
+    四. 京东PC的布局   
+    
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    */
+
+
+
+
+</script>
+</html>  

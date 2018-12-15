@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    /*
+    一.创建对象
+    1) var obj = {    字面量创建对象 {}
+        name : '哈哈',
+        age : 20
+    };
+    2)new Object() 创建对象;   var a = new Object('刘德华') a是个String对象
+         var dog = new Object();    
+            dog.name ='大黄';
+            dog.age = 3;
+            dog.bark = function () {
+                console.log('汪汪汪');
+            }
+    3) 对象值的获取两种  obj.name  或  obj['name']
+
+    二.自定义构造函创建对象  new 构造函数名() 只new不创建函数会报错;工厂函数创建对象 没有new 不实用
+       有4个特点 a b c d ; 
+    a. new 关键字 利用构造函数 产生一个新的对象  实例化  
+    b. this 就指向创建的这个空对象  
+        1)谁调用就指谁  window.fn() 
+        this 在函数中的指向  window  因为window 调用了这个函数 
+        function fn() {
+            console.log(this);
+        }
+        fn(); // window.fn()  window.alert(11);
+        2) this 在对象的指向 指向的是obj 
+        var obj = {
+            name: 'andy',
+            sayHai:function() {
+                console.log(this);
+                that = this;
+            }
+        }
+        obj.sayHai(); 和第一个的情况类似,this指向 obj
+        console.log(that === obj);
+        3) this 指向构造函数调用者 f  this指向 Fn
+        function Fn() {
+            console.log(this);
+            that = this;
+        }
+        var f = new Fn();
+        console.log(that === f);
+    c. 执行构造函数里面的代码(完成赋值操作)
+    d. 返回这个对象
+        1)  function Student(name){
+                this.name = name;
+                this.play = function () {
+                    console.log(this);
+                }
+            }
+            var mark = new Student('吴彦祖');
+            mark.play();
+        2)function Object(name,age,sex) {  构造函数创建对象
+            this.name = name;
+            this.age = age;
+            this.sex = sex;
+            this.dz = function () {
+               return this.name + this.age + this.sex +'在赤壁观战';
+            };
+            this.eat = function () {
+                return this.name + this.sex + this.age + '在吃海鲜';
+            };
+        }
+        var fn = new Object('曹操',18,'男');
+        //整个对象
+        console.log(fn);
+        //对象里面的name值
+        console.log(fn.name);
+        //对面里面的函数的返回值
+        console.log(fn.dz());
+        console.log(fn.eat());
+        //对象里面的eat函数的整体
+        console.log(fn.eat);
+    三.for in 遍历对象  遍历json 
+    遍历对象 
+    for (var key in obj) {
+        k; name
+        obj[k]; 张三
+    }
+    遍历json json格式双引号 其他和对象一致
+    var json = {
+        "name": "张三",
+        "age":18
+    }
+    for (var key in json) {
+        k;
+        json[k];
+    }
+    四.内置对象
+    Math 数学内置对象
+    圆周率Math.PI  最大值Math.max()  向下取整Math.floor  向上取整Math.ceil  四舍五入Math.round
+    随机数Math.random() 返回[0 , 1)的随机数  
+    随机整数 Math.floor(Math.random()* (max - min + 1) + min);
+        案例随机颜色:
+    function getRandom(min, max) {
+        return Math.floor(Math.random() * (max - min + 1) + min);
+    }
+        var r1 = getRandom(0, 255);
+        var r2 = getRandom(0, 255);
+        var r3 = getRandom(0, 255);
+    document.body.style.backgroundColor = 'rgb(' + r1 + ',' + r2 + ',' + r3 +')';
+        绝对值 Math.abs() 
+    console.log(Math.abs('-2'));  2  转换为数值型 在取绝对值
+    console.log(Math.abs('abs'));  NaN
+
+    五.Date日期内置对象  Date() 必须实例化来使用
+    1)var date = new Date(); 参数为空时 返回当前时间   输入参数日期  返回输入的日期
+        输入时间的注意点
+        a. 字符串 var date = new Date('2018-11-13')
+        b. 数值型 var date = new Date(2018, 11, 13) 返回的是不是11月是12月
+    2)日期的毫秒值的4种方法  直接获取距离1970年1月1号的毫秒值
+    a. date.valueOf()   b. date.getTime()  c. var date1 = +new Date() d. h5中 Date.now()
+        console.log(date.getFullYear()); // 2018 得到当前日期的年份
+        console.log(date.getMonth() + 1); // 6 得到的月份比实际的小1  月份是从0开始  0~11
+        console.log(date.getDate()); // 6  几号
+        console.log(date.getDay()); // 5    0 星期天  1星期一   2是星期二 ....
+    案例1:  获得现在的年月日星期时分秒
+    var date = new Date();
+    function getDay() {
+        var date = new Date();
+        var arr = ['星期一','星期二','星期三','星期四','星期五','星期六','星期日'];
+        var year = date.getFullYear();
+        var month = date.getMonth() + 1;
+        var dates = date.getDate();
+        var day = date.getDay();
+        var h = date.getHours();
+        var m = date.getMinutes();
+        var s = date.getSeconds();
+        // 当数值小于10时在前面补0
+        h = h < 10 ? '0' + h : h;
+        m = m < 10 ? '0' + m : m;
+        s = s < 10 ? '0' + s : s;
+        return year + '年' + month + '月' + dates + '日' + arr[day] + h + '时' + m + '分' + s + '秒';
+    }
+    console.log(getDay());
+    案例2: 倒计时案例
+    function endTime(time) {
+        var endTime = +new Date(time);
+        var nowTime = Date.now();
+        var lastTime = (endTime - nowTime) / 1000;
+        var day = parseInt(lastTime / 60 / 60 / 24);
+        var h = parseInt(lastTime / 60 / 60 % 24);
+        var m = parseInt(lastTime / 60 % 60);
+        var s = parseInt(lastTime % 60);
+        h = h < 10 ? '0' + h : h;
+        m = m < 10 ? '0' + m : m;
+        s = s < 10 ? '0' + s : s;
+        return '距离结束时间还剩下' + day + '天' + h + '时' + m + '分' + s + '秒';
+    }
+    console.log(endTime('2018-12-12'));
+
+    
+    
+    
+    
+    
+    
+    */
+
+</script>
+
+</html>

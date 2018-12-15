@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    /*
+    一. 事件绑定的方法 (绑定事件on)
+        bind(); 绑定多个事件
+        $("#dv").bind({"click": function(){},"mouseover": function(){}});
+        $("#dv").bind("mouseover mouseout": function(){}}); 
+        $("#dv").unbind("click"); 解除绑定的事件
+        delegate(): 3个参数,要绑定事件的元素--p, 事件名字--click, 处理函数
+        $("#dv").delegate("p", "click", function(){});
+        $("#dv").undelegate("p","click"); 解绑
+        $("#dv").off("click");解绑 子元素的事件解绑,父元素的事件还在
+        $("#dv").off();解绑 子元素和父元素的事件都被移除
+        $("#dv").trigger("click"); 触发事件
+        $("#dv").triggerHandler("click"); 触发事件 不会触发浏览器的默认事件
+        on();两个参数:1事件名, 2事件处理函数
+        on();三个参数:1事件名, 2要绑定事件的元素--p, 3事件处理函数
+        on();父元素调用, 目的:为子级元素绑定事件, 常用事件委托,动态创建时,无法找到子元素,就只能给父元素绑定事件
+        $("#dv").on("click", "p", function(){}); 
+            $(this);
+            e.target 触发事件的
+            e.currentTarget 真正绑定的事件
+            e.delegateTarget 代替绑定事件调用的
+    二. 常见方法
+        keydown(); 键盘按下事件 e.keyCode 获取键盘码
+        $(document).keydown(function(e){var keyCode = e.keyCode});
+    三. 事件冒泡(jQuery中)
+        取消事件冒泡
+        return false;
+        event.stopPropagation(); function(e){e.stopPropagation()};
+        取消默认行为
+        return false;
+        event.preventDefault();
+    四. 
+        lis.each(function (index, element) {}); 遍历对象 第一个参数:索引,第二个参数:对象
+        H5C3中的方法
+            lis.forEach(function(value, idnex){}); 和each相反
+        多库共存
+        让jQuery对$对象进行控制权释放
+        var xy = $.noConflict(); 从此以后xy就是曾经的$
+        var $xy = 100; $原本是对象 --->变量
+        
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    */
+
+
+
+</script>
+</html>

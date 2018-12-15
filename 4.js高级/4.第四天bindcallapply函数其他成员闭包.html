@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+
+    /*
+    一. bind() call() apply() 
+        function foo(x, y) {
+            console.log(this);
+            console.log((x + y));
+        }
+        var obj = {
+            name: "lisi"
+        }
+        1)bind() 函数会返回一个新函数（称为绑定函数），
+           新函数与被调函数（绑定函数的目标函数）具有相同的函数体
+            只会将对象绑定到一个函数上,没有调用
+            var f = foo.bind(obj); 不能调用,只能用一个变量接收来调用传参
+            f(1, 4); this是obj; 值是5; 
+        2)call()若干参数  apply()数组 
+        调用一个函数, 其具有一个指定的 this 值和分别地提供的参数(参数的列表)。
+            改变this的指向,并调用函数,相当于obj.foo();
+            foo.call(obj,1,2);  this 是obj 值3
+            foo.apply(obj,[1,3]); this 是obj 值4
+            相当于foo();
+            foo.call(null,1,2); this是window 值3
+            foo.apply(null,[1,3]); this是window 值4
+        3)bind() call() apply()在伪数组中的应用
+            arguments伪数组(有索引号和length的对象)
+            通过Array的原型,解决伪数组没有方法
+            var obj = {
+                0: 10,
+                1: 20,
+                2: 30,
+                3: 40,
+                length: 4
+            }
+            Array.prototype.push.call(obj,50);
+            Array.prototype.splice.apply(obj,[0,3]);
+            bind();需要一个变量接收,再调用
+            var o = Array.prototype.push.bind(obj);
+            o(70);
+            var f = ["dad"].push.bind(obj)
+            f(50);
+            var a = [].push.bind(obj);
+            a(60);
+            console.log(obj);
+        4)借用apply()求最大值
+            var arr = [2,3,44,4,2,66];
+            Math.max 不能求数组中的最大值,借用window的Math.max
+            console.log(Math.max.apply(null,arr)); 66
+            console.log(Math.max.apply(Math,arr)); 66
+            console.log.apply(console,arr); 2,3,44,4,2,66
+        5)bind()在定时器中的应用
+            var obj = {
+                name: "s",
+                fun: function () {
+        延时定时器中的this是window,用bind改变this的指向,就是谁调用谁就bind(this)中的this
+                    setInterval(function () {
+                        console.log(this.name);
+                    }.bind(this),1000);
+                }
+            }
+            obj.fun(); 结果s
+    二. 函数的其他成员
+        函数可以作为 (参数和返回值)
+        function fn(x, y, z) {
+          console.log(fn.length) // => 形参的个数 3
+          console.log(arguments) // 伪数组实参参数集合 [10, 20, 30]
+          console.log(arguments.callee === fn) // 函数本身 
+          console.log(fn.caller) // 函数的调用者 调用者的函数体function f(){fn(10, 20, 30)};
+          console.log(fn.name) // => 函数的名字  fn
+        }
+        function f() {
+          fn(10, 20, 30)
+        }
+        f();
+    三. 闭包的本质:全局作用域下可以访问到局部变量
+            在一个作用域可以访问另一个作用域的变量;
+        !)普通情况
+        function fo() {
+            var c = 10;
+            return c;
+        }  
+        console.log(c); 报错  访问不到局部变量c;
+        2)闭包 (函数嵌套函数)
+        function foo() {
+            var n = 10;
+            function fn(){
+                return n;
+            }
+            return fn;
+        }
+        var f = foo();
+        var a = f();
+        var b = f();
+        console.log(f()); 10;
+        console.log(a === b); true  在不是闭包的情况下,a 和 b 是不相等的
+        有点类似于下列的情况
+            var c = 10;
+            unction fo() {
+               // var c = 10;
+               return c;
+            
+            o();
+        3)定时器的闭包
+            普通情况
+            for(var i = 0; i <= 5; i++) {
+                setInterval(function(){
+                    console.log(i);
+                }, i*1000);
+            }
+            闭包 js是单线程的事件队列的编程语言
+            for(var i = 0; i <= 5;i++) {
+                (function(i){
+                    setInterval(function(){
+                        console.log(i);
+                    }, i*1000);
+                })
+            }
+        4)思考
+            var name = "The Window";
+            var object = {
+                name: "My Object",
+                getNameFunc1: function () {
+                    // console.log(this);
+                    return function () {
+                        return this.name;
+                        // console.log(this);
+                        // return console.log(this);
+                    };
+                }
+            }
+            object.getNameFunc1()
+            var a = function () {  a(); //this是window
+                        return this.name;
+                        // console.log(this);
+                        // return console.log(this);
+                    };
+            console.log(a()); console.log( object.getNameFunc1()()); this是window
+            var name = "The Window";
+            var object = {
+                name: "My Object",
+                getNameFunc: function () {
+                    var that  = this;   改变this的指向
+                    return function () {
+                        return that.name;
+                        // return console.log(that);
+                        ;
+                    };
+                }
+            }
+            object.getNameFunc(); //this是object
+            console.log(object.getNameFunc()());
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    */
+
+
+
+</script>
+</html>

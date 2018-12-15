@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script> 
+    /*
+    1.算术运算符 + - * / %
+     % 取余 if判断是否能被某一个数整除
+    2.一元运算符 
+     ++a --a 前置加加或减减 先自增 后赋值
+     a++ a-- 后置加加或减减 先赋值 后自增
+     前置加加 和后置加加 的面试题
+        var a = 1;
+        var b = ++a + ++a;
+    3.比较运算符 > < >= <= == != === !== 
+    == 比较的值是否相等
+    ===比较的是值和数据类型是否相等
+    4.逻辑运算符 在if(中经常使用)
+    && 与 并且 一个是false都false  先与 后或
+    ||  或者 一个是true都true
+    !   非 取反
+        //&&的短路运算符
+        //onsole.log("前面" && "后面");//后面
+        //onsole.log(true && true);//true
+        //onsole.log(undefined && 0);//udnefined
+        //onsole.log(false && false);//fasle
+        //onsole.log(0 && "后面");//0
+        //onsole.log(false && true);//false
+        //onsole.log("前面" && null);//null
+        //onsole.log(true && false);//fasle
+        //onsole.log("0" && "");// ""
+
+        //||的短路运算符
+        console.log("前面" || NaN);//"前面"
+        console.log("前面" || "后面"); //"前面"
+        console.log(-1 || 0);//-1
+        console.log(undefined || null);//null
+        console.log("" || "哈哈哈");//"哈哈哈"
+        //判断某年闰年
+        var year = prompt('请您输入要检测的年份:');
+        if(year % 4 == 0 && year % 100 !=0 || year % 400 ==0){
+            alert(year + '是闰年');
+        } else {
+            alert(year + '是平年');
+        }
+    
+    5.赋值运算符
+    +=  *=  /=  
+    var a = 10
+    a+= 5 ;===>> a = a + 5;
+    6.三元表达式  简化版的if else 
+        num++  一元运算符   3 + 5  二元运算符
+        ? :    三元运算符
+        a. 有三元运算符组成的式子 我们成为 三元表达式  简化版的 if else 
+        b.   条件表达式的结果为true(返回表达式2),false(返回表达式3) ?  表达式2 : 表达式3;
+
+        1)兼容性问题可以简单处理
+        2)3个数比较最大值
+        var a = 25; 
+        var b = 10;
+        var c = 15;
+        var max = (a > b ? a : b) > c ? (a > b ? a: b) : c ;
+        console.log(max) ==> 25
+    7.if分支语句  
+        if() {
+
+        }else if {
+
+        }else if {
+
+        }else {
+
+        } 
+        
+        switch分支语句  给多个值,执行该值对应的语句
+        a.swicth比较的是全等比较
+        b.每一个case块必须要有break,不要就穿透下去了
+        c.可以没有default  后面不跟值 直接冒号;
+        switch () {
+            case 值1 :
+                输出语句1;
+                break;
+            case 值2 :
+                输出语句2;
+                break;
+            default :
+                最后语句;一般不要写
+        }
+        var sc = 90;
+        sc = parseInt(sc / 10); 除以10取整
+        switch (sc) {
+            case 10:
+            case 9:
+                console.log("A");
+                break;
+            case 8:
+                console.log("B");
+                break;
+            case 7:
+                console.log("C");
+                break;
+            case 6:
+                console.log("D");
+                break;
+            default :
+                console.log("欠收拾了");
+        }
+
+
+
+
+
+    */
+    
+
+
+</script>
+</html>

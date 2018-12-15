@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    /*
+    一. 服务器开发的基础
+        1) B/S架构和C/S架构0的区别(重要)
+            应用软件架构一般分为两类：
+         B/S 架构：Browser(浏览器)←→ Server(服务器)，这种软件都是通过浏览器访问一个网站使用，服务器提供数据存储等服务。
+         C/S 架构：Client(客户端) ←→ Server(服务器)，这种软件通过安装一个软件到电脑，然后使用，服务器提供数据存储等服务。
+            B/S的优点与缺点： 浏览器
+            	优点：部署方便(不用安装)，可维护性强。
+            	缺点：用户体验不好，不能针对每一个用户的不同特点进行设置
+            C/S的优点与缺点： APP
+            	优点：用户体验好
+            	缺点：部署不方便(需要安装)，可维护性弱	
+        2) IP地址 域名 DNS服务器和host文件 端口 URL
+            IP: 127.0.0.1(IP) 是本地回环地址 localhost(域名)：用来测试本机服务器是否连通;
+                localhost 含义为本地主机，对应127.0.0.1 这是一个保留域名，主要用于本地测试。
+                IP地址+端口号来区分页面的不同服务
+            域名: 给 IP 起名字(别名)域名,是需要花钱注册的
+            hosts 文件: 先请求hosts文件,通过域名查找本地hosts文件中的IP地址,如果没有就请求DNS服务器.
+            DNS服务器: 后请求远程服务器通过域名(类似于键)来获取当前服务器的IP(类似于值);
+            端口: TCP/IP协议中的端口,每一个端口都有一个编号，每台计算机只有 65536 个端口(0-65535)
+                - http web默认的端口 80 - https 默认的端口是 443  80代表网站，20和21代表FTP mysql服务端口3306
+            URL: 表示网络当中某一个网页的完整访问地址，它具有一定的格式：
+                 -- 协议名称://域名:端口/文件目录(文件名称)?key=value&key2=value2
+        3) 请求响应流程 (重要)
+            1. 用户打开浏览器
+            2. 地址栏输入我们需要访问的网站网址（URL）
+            3. 浏览器通过  DNS 服务器 获取即将访问的网站  IP 地址
+            4. 浏览器发起一个对这个 IP地址的 请求
+            5. 服务端监听指定的 端口 的服务器软件接收到这个请求，进行相应的处理
+            6. 服务端将处理完的结果返回给客户端浏览器（响应）
+            7. 浏览器将服务端返回的结果呈现到界面上
+    二. 环境的搭建  apache PHP mysql 
+        1) PHP的环境                               扩展：实际生产环境中)项目上线环境)           
+            windows+apache+php+mysql (wamp)            Linux+nginx+php+mysql  (lnmp)
+            windows:操作系统                            linux:操作系统
+            apache:web服务器                            nginx:web服务器
+            phpphp语言解析器                            php：php语言解析器
+            mysql: 数据库                               mysql: 数据库
+        2) PHPstudy是WAMP开发的集成软件包, 一键安装(搭建好的环境安装即可);  http://www.phpstudy.net/
+            通过主机地址:127.0.0.1/l.php  来验证是否安装成功
+            设置服务器时区,在PHP的配置文件中设置date.timezone选项，确保服务器可以读取正确的时区信息。
+                操作步骤：phpstudy 其他选项菜单  PHP扩展及设置  参数值设置 date.timezone PRC
+                保存重启服务器（只有在重启时才会读取配置文件）
+            创建虚拟服务器
+                1.配置域名管理(保存), 打开配置文件(vhosts.conf) --> Options Indexes 
+                2.在本地hosts文件, 修改127.0.0.1  www.baixiu.com, 域名和服务器建立对应的关系
+    三. PHP语言   (每行结束加分号,不然就报错)
+            PHP解决输出中文字符等特殊字符显示乱码问题
+            header(“content-type:text/html;charset=utf8”); 
+        1)PHP标记
+            <?php 可以让代码进入“PHP 模式”
+            ?> 可以让代码退出“PHP 模式”
+            只有处于 PHP 标记内部的代码才是 PHP 代码，PHP 标记以外都原封不动。
+            如果 PHP 代码段处于整个文件的末尾，建议（必须）删除结束标记，这样不会有额外的空行产生。
+        2)与HTML混遍
+            <?php if ($age >= 18) { ?>   或者   <?php if ($age > 18): ?>
+              <p>成年人</p>                        <p>成年人</p>             
+            <?php } else { ?>                   <?php else: ?>             
+              <p>小朋友</p>                        <p>小朋友</p>             
+            <?php } ?>                          <?php endif ?>       
+                     
+        3)注释 //  单行   /*多行*/  
+ /* 四 .语法
+            编程语言常见的语法
+                变量 —— 用于临时存放数据的容器
+                顺序结构 —— 先干什么再干什么
+                分支结构 —— 如果怎样就怎样否则怎样
+                循环结构 —— 不断的做某件相同的事
+                函数 —— 提前设计好一件事怎么干，然后想什么时候干就什么时候干
+                运算符 —— 数学运算和字符串拼接
+                字面量 —— 在代码中用某些字符组成，能够表达一个具体的值 这些字符之间表示数据的方式叫做字面量
+            重点注意的问题：
+                1. 变量
+                2. 双引号字符串和单引号字符串的差异
+                3. 指令式的语法
+                4. foreach
+                5. 函数作用域问题
+                6. 字符串拼接
+        变量
+            规范
+                1.变量的组成 $ 开头，后面为变量名。
+                2.变量名的命名规则由英文字母、数字、下划线等多个字符组成，以字母或者下划线开头。变量命名严格区分大小写。
+            申明变量格式
+                <?php   
+                    $foo; // 申明一个变量，变量名为 `foo`，未对其进行赋值
+                    $bar = 'baz'; // 申明一个变量，将一个值为 `baz` 的字符串赋值给它
+                    echo $foo; // 输出一个变量名为 `foo` 的变量
+                    fn($bar); // 将一个变量名为 `foo` 的变量作为 `fn` 的实参传递
+                ?>
+            常见函数
+                1. isset():判断变量是否定义了，同时它还可以判断变量的值是否为null,如果定义了且值不为null,则返回true,否则返回false
+                2. empty():判断变量是否为空值，为空的值有：""  0 "0",null,false,array().如果值为以上中的某一个，则返回值
+                3. unset():删除变量
+                    - 如果删除一个变量，那么变量的值会置为null
+                    - 可以同时删除多个变量
+        数据类型 (了解)
+            常见的 PHP 数据类型与 JavaScript 基本一致：
+                - string（字符串） **
+                - integer（整型）—— 只能存整数
+                - float（浮点型）—— 可以存带小数位的数字
+                - boolean（布尔型）
+                - array（数组） **
+                - object（对象）
+                - NULL（空）
+        数据类型转换
+          <?php
+              $str = '132';
+              $num = (int)$str; // 将一个内容为数字的字符串强制转换为一个整形的数字
+              $flag = (bool)$num; // 将一个数字强制转换为布尔值
+          ?>
+        字符串 (重要)
+                单引 echo 'hello\nworld'; => 'hello\nworld';     
+                    不支持特殊的转义符号，例如 \n
+                    如果要表示一个单引号字符内容，可以通过 \' 表达
+                    如果要表示一个反斜线字符内容，可以通过 \\ 表达
+                双引(输出引号里的变量) $name = 'haha'; echo "hello$name"; => hellohaha;
+                    支持转义符号：\"  \  $  \r \n \t
+                        strrchr()
+                    $str = "abc.txt.html";
+                    $str1 = strrchr($str,".");
+                    echo $str1;
+        
+        数组
+            PHP 中数组可以分为两类：索引数组 关联数组
+                索引数组 与 JavaScript 中的数组基本一致
+                <?php
+                 定义一个索引数组
+                    $arr1 = array(1, 2, 3, 4, 5);
+                    var_dump($arr1);
+                    $arr2 = [1, 2, 3, 4, 5];
+                    var_dump($arr2);
+                ?>
+            关联数组 有点类似于 JavaScript 中的对象
+                <?php  注意：键只能是`integer`或者`string`
+                    $arr = array('key1' => 'value1', 'key2' => 'value2');
+                    var_dump($arr);
+                    $arr2 = ['key1' => 'value1', 'key2' => 'value2'];
+                    var_dump($arr2);
+                ?>
+
+            二维数组
+                数组的值也是一个数组
+                $arr = array(
+                    Array('name' =>'zhangsan','age'=>18)
+                    Array('name' =>'lisi','age'=>20));
+                )
+            数组遍历
+                foreach($arr as $k=>$v){
+                    echo $k. '---' .$v;
+                }
+            查询数组中是否有对应的值返回一个bool类型的值
+            $bool = in_array($name, $arr)
+        运算符
+            数学运算符，逻辑运算符与 JavaScript 基本一致，无额外特殊情况。
+            注意：字符串连接（拼接）采用的是比较特殊的 点 (.) 
+            <?php
+                $name = 'zce';
+                $message = 'hey ' . $name; // 拼接 `hey ` 和 `zce`
+                $foo .= $message; // 相当于 +=
+            ?>
+        语句
+            常见的输出语句
+            echo 输出字符串 数值及表达式
+            print_r() 输出
+            var_dump() 输出的是详细的数组
+            <?php 
+                // 关于输出方式 echo print_r() var_dump()
+                echo true;    // 1
+                echo false;   // null
+                echo '<hr>';
+                print_r([1,2,3,'abc']);
+                echo '<hr>';
+                var_dump([1,2,3,'abc']);
+            ?>
+            <?php 
+                // 关于变量的一些函数
+                // isset()   两层意思：1.变量是否存在  2.变量存在但是值为null
+                $age = 18;
+                $name = null;
+                var_dump(isset($name));
+                echo '<hr>';
+                // empty()   空的范围比较多：  null,0,'0',[],false
+                $num = "0";
+                var_dump(empty($num));
+                echo '<hr>';
+                // unset()   删除变量
+                $gender  = '男';
+                var_dump(isset($gender));
+                unset($gender);
+                var_dump(isset($gender));
+            ?>
+            分号分割
+            if、switch、while、for、 foreach、function......
+        流程控制
+            - 顺序结构
+            - 分支结构
+              - if ... else
+              - switch ... case
+            - 循环结构
+              - for
+              - while
+              - foreach --- 专门用来遍历数组
+                    <?php
+                    $arr = array('name' => 'zhangsan', 'age' => '18');
+                    foreach ($arr as $key => $value) {
+                      echo $key . ' ' . $value;
+                    }
+            指令式的 if、for、foreach、while 单独掌握
+                <?php
+                if ($i > 0) : // 指令式就是将开始 { 换成 :  结束 } 换成 endif;
+                  echo 'ok'
+                endif;
+            for ($i = 0; $i < 10; $i++) :    // for foreach while 也是一样
+              echo $i;
+            endfor;
+        函数
+            定义与使用函数的方式与 JavaScript 相同：
+               <?php
+               function foo ($name, $title) {  // 函数名不区分大小写
+                 echo "$name ($title)";
+               }
+               foo('zce', 'UFO');  // 调用
+               Foo('zgd', 'SBO'); // 大小写不区分
+            注意：使用方式有点差异（函数名不区分大小写），但是不要这么搞！！！
+            建议在 PHP 中采用下划线式（snake_case）做命名规则，不管是函数还是变量
+        特性
+            变量作用域
+            关于变量作用域这一点，PHP 与绝大多数语言也都不同：默认函数内不能访问函数所在作用域的成员。
+            而在 PHP 中：
+                <?php
+                    $top = 'top variable';
+                    function foo () {
+                        $sub = 'sub variable';
+                        echo $top;  // => 无法拿到
+                        function bar () {
+                          echo $top;  // => 无法拿到
+                          echo $sub;  // => 无法拿到
+                        }
+                        bar();
+                    }
+                foo();
+                ?>
+            如果需要访问全局变量，可以通过 global 关键字声明：
+                <?php
+                    $top = 'top variable';
+                    function foo () {
+                        global $top;   // 声明在当前作用域中获取全局作用域中的 `$top`
+                        $sub = 'sub variable';
+                        echo $top;   // => `top variable`
+                        function bar () {
+                            global $top, $bar;  // 声明在当前作用域中获取全局作用域中的 `$top` 和 `$bar`
+                            echo $top;   // => `top variable`
+                            echo $sub;   // => 任然无法拿到，因为 `$sub` 不再全局范围，而是在 `foo` 函数中定义
+                        }
+                        bar();
+                    }
+                    foo();
+                ?>
+        超全局变量
+            PHP 中的许多预定义变量都是“超全局的”，这意味着它们在一个脚本的全部作用域中都可用。
+            在函数或方法中无需执行 global $variable; 就可以访问它们。
+            这些超全局变量是：
+            - $GLOBALS — 引用全局作用域中可用的全部变量
+                $num  = 10;   
+                //定义一个全局变量相当于给超全局数组变量$GLOBALS添加了一个成员，
+                //这个成员的键就是变量的名num
+                // echo "<pre>";  数组打印出来整齐的换行<pre></pre>
+                // print_r($GLOBALS);
+                // echo "</pre>";
+                
+                function foo(){
+                	echo $GLOBALS['num'];   //10
+                	$GLOBALS['a'] = 100;
+                }
+                foo();
+                echo '<hr>';  下划线
+                echo $a;  //100
+
+            - $_SERVER — 获取服务端相关信息
+                    $_SERVER["REQUEST_METHOD"] 获取当的请求方式如: GET POST
+            - $_REQUEST — 获取提交参数
+            - $_POST — 获取 POST 提交参数 有数据传递时使用
+            - $_GET — 获取 GET 提交参数 (url直接请求也是GET和Ajax的GET)
+            - $_FILES — 获取上传文件
+                    表单中enctype="multipart/form-data"的意思，是设置表单的MIME编码
+                    application/x-www-form-urlencoded，不能用于文件上传
+                    <form action="" method="post" enctype="multipart/form-data">
+             头像：     <input type="file" name="photo" >  上传文件属性type="file"
+                        <input type="submit" value="添加信息">
+                    </form>           
+                    //获取文件的后缀名
+                    $ext = strrchr($_FILES["photo"]["name"], ".");
+                    //重新命名文件,当前的秒值+随机数+后缀名,防止重名
+                    $filename = time().mt_rand(1000, 9999).$ext;
+                    //把文件的信息,复制到"./day5".$filename中
+                    move_uploaded_file($_FILES["photo"]["tmp_name"],"./day5".$filename);
+                    print_r($_POST);
+                    //$_POST打印出来一个二维数组,$_POST[]是把图片的+后缀名,添加到数组中
+                    $_POST[] = $filename;
+                    //把数组用|分割符链接成字符串
+                    $str = implode("|",$_POST);
+                    //把$str追加到"./data.txt"中,\n在文件换行,使用FILE_APPEND追加,防止覆盖已有文字
+                    file_put_contents("./data.txt",$str."\n",FILE_APPEND);
+
+            - $_ENV — 操作环境变量
+            - $_COOKIE — 操作 Cookie
+                <?php    echo "buy one bread"; //在网页显示一句话
+                    //设置cookie (浏览器缓存,直译饼干)
+                    //客户端发送请求setcookie.php,在服务器端解析setcookie.php并返回响应头带回的xiaopiao=bread|1|10
+                    响应头带回cookie;键, PHP_INT_MAX ,有效时间,"/",整张有效
+                    setcookie("xiaopiao","bread|1|10|11111",PHP_INT_MAX,"/");
+                    //获取cookie 
+                    //第二次访问访问服务器,数据储存cookie请求头,并携带xiaopiao=bread|1|10|11111到服务器
+                    //最后响应头返回xiaopiao=""的值bread|1|10|11111
+                    print_r($_COOKIE["xiaopiao"]);
+                    //删除cookie 写键名,值为空
+                    setcookie("xiaopiao","",PHP_INT_MAX,"/");
+                ?>
+                
+            - $_SESSION — 操作 Session (有加密安全效果高)
+                    session_start(); 打开session
+                    $_SESSION["username"] = $name;
+                    用户名输入的密码不获取
+                    浏览器Cookie中的数据
+                        Name    Value 
+                    PHPSESSID	2l04he1gcsdv9km567kljkro63     $_SESSION["username"] = $name;
+                    username	tom                            setcookie("username",$name);
+                    
+                    <?php
+                        session_start();
+                        //判断当前是否登录正确
+                        if(!$_SESSION["userInfo"]){
+                          header("location:login.php");
+                        }
+                    ?>
+        载入其他文件的方式
+            PHP的引入其他PHP的方式:
+                include   一般用于载入公共文件,不影响后面程序的运行
+                include_once   只会第一次使用时执行
+                require   一般用于不可缺少的文件,载入文件有错误则停止当前文件的执行
+                require_once         
+        常用的API
+            时间处理
+                time() 格林威治时间1970-01-01 到现在有多少秒杀
+                date()  获取有格式的当前时间
+                strtotime()将有格式的时间字符串转换为时间戳
+                // 关于时间的函数 time()  date()   strtotime()
+                // 1.time()   从1970-1-1 00:00:00到当前经过了多少秒
+                echo time();  //1540004827
+                echo '<hr>';
+
+                // 2.date()   当前时间格式化成年月日 时分秒
+                echo date("Y-m-d H:i:s",time());
+                // 案例1：获取30天前星期几?
+                echo '<hr>';
+                echo date("N",time()-30*24*3600);
+                echo '<hr>';
+
+                // 3.strtotime()  将满足时间格式字符串转换成时间戳
+                echo strtotime('2018-10-20');
+                echo '<hr>';
+                // 案例2：计算你出生时星期几  1990-9-10
+                echo date("N",strtotime('1990-9-10'))
+
+    */
+
+
+
+
+
+</script>
+</html>

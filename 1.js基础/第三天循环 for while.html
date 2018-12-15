@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    // 大的知识点 for 双for while do while        continue break
+    // 断点调试 循环语句中可以观察执行的每一个步骤
+    // 1.for 配合 if语句  求100的和  求0~100被某个数整除的 字符串的拼接
+    /*  
+        a.  求和  求被某个数整除
+             var sum = 0;
+            for(var i = 0; i < 100; i+=){
+                sum += i;
+            }
+            console.log(sum); 5050
+        b.  字符拼接
+        var num = prompt('请输入班级总的人数:'); // num 班级总的人数
+        var sum = 0; // 总成绩
+        var average = 0; // 平均成绩
+        for (var i = 1; i <= num; i++) {
+            // alert('次数');
+            var score = prompt('请输入第' + i + '个学生的成绩');
+            sum += parseFloat(score); // 输入的成绩，累加  注意要转换为数值型才可以相加
+        }
+        // 平均成绩要写到for 的外面  我们要用总的成绩 除以 num 总人数 
+        average = sum / num;
+        alert('班级总的成绩是：' + sum);
+        alert('班级总的平均成绩是：' + average);
+
+        2.双for 循环  外层循环一次 内层全部循环完成
+        for (var i = 0; i< 3;i++) {
+            console.log('外出循环第' + i + '次');
+            for (var j = 0; j < 3; j++) {
+                console.log('里层的循环第'+ j + '次');
+            }
+        }
+        外层循环执行一次,则内层循环要执行全部次数(跑完毕)
+        倒三角的星星
+        var str = '';
+        for (var i = 0 ;i < 9; i++) {//外层循环趟数
+            for(var j = 0; j < 9 - i;j++){ //内层循环次数
+                str += '☆';
+            }
+            str=str +'\n'
+        }
+        console.log(str)
+        九九乘法口诀
+        var str = '';
+        for(var i = 0; i <= 9; i++){
+            for(var j = 0; j <= i; j++) {
+                str += j  + 'x' + i + '=' + i * j  + '\t'
+            }
+            str = str + '\n'
+        }
+        console.log(str)
+
+        3.while 循环 用在不知道要循环多少次情况下
+        var i = 0;
+        while (i < 10) {
+            console.log('哈哈');
+            i++; //限制条件 千万别忘了 否则会死循环
+        }
+        
+        4.do while 循环  先执行一次再循环,很少用
+        var j = 5;
+        do {
+            console.log('hi');
+            j++;
+
+        } while (j <= 2)
+
+        5. continue 和 break 关键字
+        continue 
+        for(var i = 1; i <= 10; i++) {
+            if(i == 3) {
+                console.log('是坏的')
+                continue; 结束本次循环,后面的代码不执行, 进入下一个循环
+            }
+            console.log('吃了第'+ i +'个');
+        }
+        //求1-100之间能够被7整除数的和
+        var sum = 0;
+        for (var i = 1; i <= 100; i++) {
+            if (i % 7 != 0) {
+                continue;
+            }
+            sum += i
+        }
+        console.log(sum);
+
+        break 终止 打断
+        for(var i = 0; i < 10; i++){
+            if(i === 3) {
+                //continue; 结束本次循环 进入下一次循环
+                break; 终止循环 整个循环结束
+            }
+            console.log(i);
+        }
+
+
+
+
+
+        */
+
+
+    </script>
+            
+            
+
+
+
+
+</body>
+</html>

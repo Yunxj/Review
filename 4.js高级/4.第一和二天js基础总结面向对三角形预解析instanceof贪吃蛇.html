@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <button class="btn">click me</button>
+</body>
+<script>
+    /*
+    一. js基础部分总结 组成(ECMAScript WebAPI(BOM DOM));
+        ECMAScript - 语法规范 js的一个标准
+            变量, 数据类型, 类型转换, 操作符
+            流程控制语句: 判断, 循环语句
+            数组, 函数, 作用域, 预解析
+            对象, 属性, 方法, 简单类型和复杂类型(引用)的区别
+            内置对象: Math, Date, Array, 基本包装类型String, Number, Boolean;
+        API 应用程序编程接口;是一些预先定义的函数，目的是提供应用程序与开发人员基于
+                某软件或硬件得以访问一组例程的能力，而又无需访问源码，或理解内部工作机制的细节
+            通俗一些:别人写好的代码，或者编译好的程序，提供给你使用，就叫做API。
+                你使用了别人代码（或者程序）中的某个函数、类、对象，就叫做使用了某个API。
+        Web API 浏览器提供的一套操作浏览器功能和页面元素的API(BOM和DOM);
+            BOM 一套操作浏览器功能的API
+                onload 页面加载事件, window顶级对象
+                弹出框
+                定时器
+                location, history
+            DOM 一套操作页面元素的API
+                获取页面元素, 注册事件
+                属性操作, 样式操作
+                节点属性, 节点层级
+                动态创建元素
+                事件:注册事件的方式, 事件的三个阶段, 事件对象
+        原生JS的核心
+            1.编程三要素 (数据, 流程控制, 函数);
+            2.BOM 与 DOM;
+            3.事件与事件对象;
+            4.高级(面向对象), 预解析, 闭包, 递归, 正则
+            5.ajax;
+        jQuery的核心, 隐式迭代, 链式编程; 无限点, 出现断链end()返回最初的对象;
+    二. 面向对象 (封装, 继承, 抽象)
+        构造函数创建对象
+            function Student(name,age,sex) {  构造函数
+                this.name = name;
+                this.age = age;
+                this.sex = sex;
+            }
+            console.log(Student.prototype); 构造函数指向-->原型对象
+            Student.prototype.constructor; 原型对象指向--> 构造函数
+            Student.prototype.sayHai = function () {
+                console.log("大家好,我是" + this.name);
+            }
+            通过构造函数,来创建对象,可以访问Student.prototype中的成员
+            var s1 = new Student('李四',20,'男');  new一个实例化对象  s1.__proto__ -->指向原型对象
+            var s2 = new Student("张三",25,"男");
+            s1.sayHai();
+            s2.sayHai();
+    三. 构造函数的原型(经典三角形 c--> a --> b );;
+        function Student(name,age,gender){  a构造函数
+	    	this.name = name;
+	    	this.age = age;
+	    	this.gender = gender;
+	    }
+	    Student.prototype.sayHi = function(){ 在原型上绑定一个方法 b 原型对象
+	    	console.log('大家好，我是'+this.name);
+	    }
+	    var s1 = new Student('lilei',18,'男'); c实例化对象
+	    var s2 = new Student('hmm',18,'女');
+	        console.log(Student.prototype === s1.__proto__);
+	        console.log(s1);
+	        console.dir(Student);
+            使用构造函数, 就使用 prototype 属性访问原型
+            使用实例对象, 就使用 __proto__ 属性访问原型
+	        console.log(Student.prototype.constructor === Student); true
+	    s1.sayHi();
+	    s2.sayHi(); 
+	        console.log(s1.constructor == Student);
+        1).构造器创建对象的本质
+            1.首先执行 new 运算符. 即创建对象. 可以简单看做为 {} 的简写var p = new ... '相当于' var p = {}
+            2.调用构造器. 并隐含一个参数, 即刚刚创建的对象. 
+            3.在构造器中使用 this 引用刚刚创建出来的对象.
+        2). new的关键字
+            1.在构造函数内部创建一个空对象; var test = {};
+            2.this就会指向这个空对象;       构造函数中的this = test, test.name
+            3.执行里面的代码(给对象赋值);
+            4.返回这个对象;
+        3). this的指向 (总结:函数内部的this, 是由函数调用的时候来确定其指向)
+            1.普通函数中this指的是window; 函数中的this指向调用者,谁调用, 指向的就是谁;
+            2.定时器的this指向window;window调用定时器,即this指向window
+            3.对象中this指的是当前对象;
+            4.在构造函数中,this指的是由构造函数创建实例化对象; 
+            5.ajax的success:function(){this};全局函数window调用,这个this指向window 
+            // 1. this指向
+            function fn () {
+                console.log(this)  // window
+            }
+            // fn() // window.fn()
+            // 2. 对象中的this
+            var obj = {
+                ff: function () {
+                    console.log(this)  // obj对象
+                }
+            }
+            // obj.ff()  // 对象函数中的this指向的是当前这个对象
+            // 3. 改变this指向
+            // 函数的方法 call apply bind    fn.bind(this指向, 参数列表)
+            // 3.1 bind
+            var ss = {name: '天天模拟器'}
+            var newfn1 = fn.bind(ss)
+            console.log(newfn1)
+            // newfn1()  // this指向的是 ss这个对象 {name: "天天模拟器"}
+            // 3.2 call
+            fn.call(ss) 
+            // 总结 bind和call区别是什么？？？   
+            // call/apply会改变this指向并立即调用  bind会改变this指向同时返回一个改变this指向之后的函数但是不会被调用，需要手动去调用
+            // apply(this指向, [参数1, 参数2， 。。。])   call(this指向, 参数1, 参数2, ....)  
+            function fn2 (a, b) {
+                console.log(a, b, this)
+            }
+            fn2.bind(null, 11, 22)() // null表示不改变this指向
+            fn2.call(null, 33, 44)
+            fn2.apply(null, [55, 66])
+            document.querySelector('.btn').addEventListener('click', function () {
+                // 1S后打印当前点击的元素
+                // 3. 比较高级的箭头函数 
+                // setTimeout(() => {   我在哪个环境中, this就指向谁 (局部调用)
+                //     console.log(this)  //点击的对象,不改变this指向
+                // }, 1000);
+                // 2. 借用遍量
+                // var that = this
+                // setTimeout(function () {
+                //     console.log(that)  // window (全局调用)
+                // }, 1000)
+                // 1. 使用bind
+                // console.log(this)  // 当前按钮
+                setTimeout(function () {
+                    console.log(this)  // window
+                }.bind(this), 1000)
+            })
+        
+    四. 预解析 在代码执行前,先预览一遍,检查语法错误,以提高代码执行的效率  (变量提升,函数申明)
+            变量声明做了一件事情：
+        1.凡是读取到 var 的时候, 就检查 var 紧跟的名字是否已经标记了（在内存中是否已经有一个变量也是这个名字了）
+        2.如果没有标记, 就表明这个名字是一个标识符, 需要被标记（在内存中开辟一段空间）
+        3.如果已经被标记了, 那么 这个 var 被忽略（在内存中不再开辟空间）
+            函数声明做了两件事情：
+        1.凡是读取到function的时候, 就检查 function紧跟的函数名字是否已经标记了
+        2.如果没有标记, 就表明这个名字是一个标识符, 需要被标记（在内存中开辟一段空间）
+        3.如果已经被标记了, 那么这个function 后面的函数名指向这个新的函数体
+
+    五. instanceof 的解释
+            function Foo(name,age){
+	            this.name = name;
+	            this.age = age;
+	        }
+	        var f1 = new Foo('lilei',18);
+	        Foo.prototype = {  改变了原型的指向, 重新开辟了一个原型链
+	        	eat:function(){
+	        		console.log('eat');
+	        	}
+	        }
+            Foo.prototype.eatt= function () { 在原型挂载一个方法,不改变原型的指向
+	        	console.log(111);
+	        }
+	        var f2 = new Foo("hmm",18);
+	            console.log(f1 instanceof Foo); false; 
+	            console.log(f2 instanceof Foo); true;
+	        f1 instanceof Foo  
+            判断 f1 是否是 Foo 的实例 这个解释是错误的
+	        Foo.prototype是否在f1的原型链上   这是正确的
+
+    第二天 写贪吃蛇 (面向对象)
+            对象(Food, Snake, Game, Tools) 自调用函数 使用自调用函数，创建一个新的局部作用域，防止命名冲突
+            (function () {
+                window.Game = Game; 在window上面挂载方法,1.防止代码全局污染 2. 外部可以访问                  
+            }());
+                自调用函数传入window的目的，是让变量名可以被压缩function(window){} -->function(w){};
+                在将来会看到别人写的代码中会把undefined作为函数的参数(当前案例没有使用)
+                因为在有的老版本的浏览器中 undefined可以被重新赋值，防止undefined 被重新赋值
+                把Food, Snake, Game, Tools 整合到一个js文件并且用在线压缩
+            ;(function (window, undefined) { 自调用函数前面加;号是有利代码解析不发生错乱
+                var Tools = {
+                getRandom: function (min, max) {
+                  return Math.floor(Math.random() * (max - min + 1)) +  min;
+                }
+              }                
+                window.Tools = Tools;   暴露Tools给window
+            })(window, undefined)
+            Game.prototype.start = function(){};原型上挂载方法,减少内存空间
+            定时器的this指向window,在定时器中第二个参数传入bind(that),改变this
+            的指向,谁调用指向谁
+            bind(that); var that = this; 改变函数的this,只能用bind,如果用call和apply会立即调用,如定时器就调用不了
+
+            静态成员 Food.age1; 只能Food调用
+            实例化成员 this.age2; var obj = new Food(); 只能obj调用 
+            
+
+        
+
+    
+    
+    
+    */
+
+
+
+
+
+
+</script>
+</html>

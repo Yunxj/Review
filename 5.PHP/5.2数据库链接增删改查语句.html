@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    /*
+    一. 封装链接数据库
+        <?php
+            function connect(){    //提高性能 
+                $conn = mysqli_connect("localhost", "root", "root", "baixiu");
+                return $conn;
+            }
+            function query($conn,$sql){
+                $res = mysqli_query($conn, $sql);
+                $arr = [];
+                while($row = mysqli_fetch_assoc($res)){
+                  $arr[] = $row;
+                };
+                return $arr;
+            }
+        ?>  
+    二. 查询语句的分类和使用(增删改查)  (--) 是sql文件的注释
+        --连接数据库
+        mysql -hlocahost -p3306 -uroot -proot
+        -- 库   增删改查
+        -- 表   增删改查
+        -- 数据  增删改查 (要注意操作完成时记得要刷新)
+        --1.查   select   字段列表  from  表列表  where  条件
+        --查询所有数据的所有字段
+        select * from stu_info;
+        --查询所有数据的部分字段
+        select id,name,age from stu_info;
+        --查询根据条件的数据
+        select *from stu_info where id = 2;
+        --查询多条件的数据
+        select id,name from stu_info where age > 15 and gender = "男";
+            
+        -- 2.  增  insert into 表 values 
+        --插入完整数据
+        insert into stu_info values(null,);
+        --根据字段列表插入部分的数据
+        insert into stu_info(age,gender) values (40,1);
+            
+        -- 3. 改  update  表 set
+        update stu_info set salary = salary + 2000 where id = 2;
+        update stu_info set aeg = age + 1, gender = "男" where id = 2;
+            
+        -- 4. 删
+        delete from stu_info where id= 4;
+            
+        --mysql 内置的数学函数   count() max min avg
+        select count(*) from stu_info;
+        select max(age) from stu_info;
+        select max(age) as max from stu_info;--别名
+        select max(name) from stu_info;
+            
+        --mysql高级查询  (关键词顺序不能变,可以不写但是不能变)
+        --where  条件查询
+        --group by 分组
+        --having  分组后再次筛选
+        --order by asc(升序) | desc(降序)   
+        --limit  1 (第一条) 2(几条) 按需求去数据条数 一般在分页中用到
+        --select * from stu_info order by score desc --(降序) limit 2 , 2
+        select * from stu_info order by score desc limit 2 , 2
+            
+        --数据库多表查询 select *from 表1 join 表2 on  连接条件  
+        --(inner join 就是 join) 没有匹配上不不保留数据
+        select name ,score, className ,teacher_name from stu_score 
+        join stu_info on stu_score.classid = stu.class.classid
+        --left join 没有匹配上左表,也不丢失数据
+        select name ,score, className ,teacher_name from stu_score 
+        left join stu_info on stu_score.classid = stu.class.classid
+        --right join 
+    三. 用PHP(写简单的接口)
+        1.  header("content-type:text/html;charset=utf8"); 请求头
+            $conn = mysqli_connent("localhost","root","root","student"); 链接数据库
+            mysqli_set_charset($conn, "utf8");  告诉mysql服务器,PHP代码本身为utf8代码
+            $sql = "select * from stu_ifo"; 查询语句    
+            $res = mysqli_query($conn, $sql); 执行语句
+            var_dump(mysqli_fetch_assoc($res)); 只能读取一行
+            echo mysqli_num_rows($res); 获取当前的列表数据的行数
+            while($row = mysqli_fetch_assoc($res)){
+                $arr[] = $row
+            }
+            var_dump($arr)
+            封装一个数据库的链接
+            function connect(){  链接只需要链接一次,单独出来提高性能
+                $conn = mysqli_connect("localhost","root","root","baixiu");
+                return $conn;
+            }   
+            function query($conn, $sql) {
+                $res = mysqli_query($conn, $sql);
+                $arr = [];
+                while($row = mysqli_fetch_assoc($res)){
+                    $arr[] = $row;
+                };
+                return $arr;
+            }
+
+                
+        2.案例增加图片
+        <?php 
+            header('content-type:text/html;charset=utf8'); //请求头,规定解析的编码
+            // 第一步：收集数据
+            $name = $_POST['name'];
+            $gender = $_POST['gender'];
+            $birthday = $_POST['birthday'];
+            // 收集上传文件信息
+            $fileName = "";
+            if($_FILES['img']['error'] == 0){
+            	$fileName = "./assets/img/".time().mt_rand(100,999).strrchr($_FILES['img']['name'],'.');
+            	move_uploaded_file($_FILES['img']['tmp_name'], $fileName);
+            }
+            // 第二步：连接数据库
+            $conn = mysqli_connect("localhost","root",'root','user');
+            // 第三步：构建sql语句
+                查询
+            $sql = "select id,name,classname from categories";
+                count(*)总和
+                $count = "select count(*) as count from posts where category_id = $categoryId"; //获取文章总数,是二维数组
+                $count = query($conn,$count_sql)[0]["count"];
+                增加
+            $sql = "insert into userInfo values(null,'$name','$fileName','$gender','$birthday')";
+                修改
+            $sql = "update classname set classid = 50 where id = 2";
+                删除
+            $sql = "delete from classname where id = 4";
+            // 第四步：执行sql语句
+            die($sql);找不到错误时,可以检查错误
+            $bool = mysqli_query($conn,$sql);
+
+            if($bool){
+            	header("location:index.php");
+            }else{
+            	echo "插入失败";
+            	echo mysqli_error($conn);
+            }
+        ?>
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    v b*/
+
+
+
+
+</script>
+</html>

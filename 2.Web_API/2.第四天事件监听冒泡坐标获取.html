@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    /*
+    一. BOM对象
+        window.onload = function(){}; 页面加载完(包括外部的js,css,图片)
+        window.onunload = function(){}; 页面卸载的时候执行(不常用)
+        setTimeout(); 隔一段时间只执行一次 少有 (第一个参数:执行函数,第二个参数:毫秒值,返回值:整数)
+        setInterval(); 每隔一段时间重复执行  如:倒计时
+    二. 注册事件 (有兼容性问题)
+      1)btn.onclick = function(){};无法给同一个对象的同一个事件注册多个事件处理函数
+        事件监听绑定事件(1.可以同一个元素绑定多个事件 2.可以设置事件阶段) 
+            addEventListener("click", function(){}, true/false); 默认fasle 冒泡 ,true 捕获); 
+            btn.attachEvent("onclick", function(){}); 只有两个参数,只有冒泡
+        处理兼容性问题 eventName, 不带on，  click  mouseover  mouseout
+            function addEventListener(element, eventName, fn) {  
+                if(element.addEventListener){
+                    element.addEventListener(eventName. fn);
+                } else if (element.attachEvent) {
+                    element.attachEvent("on" + eventName, fn);
+                } else {
+                    element["on" + eventName] = fn;
+                }
+            }
+      2)移除事件
+        btn.removeEventListener("click", a);
+        btn.detachEvent("onclick", a);
+        btn.onclick = null;
+      3)事件的三个阶段: 
+        第一个阶段: 捕获阶段;
+        第二个阶段: 执行当前点击的元素;
+        第三个阶段: 冒泡阶段;
+      4)冒泡产生的实际对象,target currentTarget this   
+        target 真正被点击的那个对象
+        currentTarget 和 this 一样 获取事件处理函数所属的对象(冒泡只要触发事件的标签)
+        btn.onclick = function (e) {
+            e.target 真正触发的那个元素
+            e.srcElement 真正触发的那个元素src为源的意思
+            var target = e.target || e.srcElement;
+            e.currentTarget 和this一样 所绑定的那个对象
+            e.clientX,e.clientY 是距离可视窗口的距离
+            e.pageX,e.pageY 是相当于页面的坐标(会随着滚动条的滚动而变化)
+            e.screenX,e.screenY 是距离屏幕边缘的距离
+            e.eventPhase 获取3个阶段   1 捕获阶段   2 目标阶段  3 冒泡阶段
+        }
+        事件函数中传e console.log(e) 等于 不传e的 console.log(event)
+      5)页面滚动出去的距离 (兼容) 注意定位问题
+        box.offsetLeft 盒子距离最近带有定位的父元素的左侧距离
+        box.offsetTop 盒子距离最近带有定位的父元素的上侧距离
+            获取页面滚动出去的距离left方向的
+        document.body.scrollLeft || document.documentElement.scrollLeft
+            获取页面滚动出去的距离 top方向
+        document.body.scrollTop || document.documentElememt.scrollTop
+        e.pageX || e.clientX + document.body.scrollLeft || document.documentElement.scrollLeft
+        e.pageY || e.clientY + document.body.scrollTop || document.documentElememt.scrollTop
+            如果内容没有超出,那么scrollHeight和clientHeight 是一样的
+            如果内容超出了,那么scrollHeight获取到的是内容的高度
+        6)取消默认行为
+        return false;
+        DOM标准方法: event.preventDefault(); e.preventDefault()需要传入形参e
+      7)阻止事件冒泡
+        e.stopPropagation(); 标准 停止事件传播 取消冒泡
+        e.cancelBubble = true; 非标准 老版本IE  
+        return false; 等于同时调用了event.stopPropagation()和event.preventDefault()
+      8)键盘事件
+        onkeydown 键盘按下的时候
+        onkeyup 键盘弹起的时候
+        window.event.keycode; 获取键盘码
+      9)鼠标事件
+        onmouseover 会触发事件冒泡
+        onmouseenter 不会触发事件冒泡    
+        onclick 点击事件
+        onmouseover 鼠标经过
+        onmouseout 鼠标离开
+        onmousemove 鼠标移动
+        onmouseup 鼠标抬起
+        onmusedown 鼠标按下
+        onfocus 鼠标获取焦点
+        onblur 鼠标失去焦点
+        onscroll 鼠标滚动
+        onkeydown 键盘按下
+        onkeyup 键盘抬起
+        ondblclick  双击 
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    */
+
+
+
+</script>
+</html>

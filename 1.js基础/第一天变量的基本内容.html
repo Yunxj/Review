@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script>
+        /*
+        1.什么是变量  就是一个存储数据的容器
+        2.如何声明变量 var
+        3.交换两个变量的值
+        var a = 1;
+        var b = 2;
+        var c = a;
+            a = b;
+            b = c;
+        console.log(a,b,c); 2 1 1
+        4.数据类型 number string boolean undefined null
+        5.  1)js 就一种数值型   不管是整数还是小数（浮点数）   Number
+                var age = 18;
+                var money = 8.8;
+            2). 进制 
+                二进制    0  1      1100
+                八进制   逢八进一   0~7        07    012  八进制前面 加 0 
+                十进制   12  77   99
+                十六进制   逢十六进一    0~9 a~f     十六进制前面加  0x12   0x1
+            3). 小数（浮点数） 不要用浮点数进行计算 
+                console.log(0.1 + 0.2);
+                console.log(0.07 * 100);
+            4). 数值的范围 最大值和最小值   （了解）
+                console.log(Number.MAX_VALUE); // js  数值型里面的最大值
+                console.log(Number.MIN_VALUE); // js  数值型里面的最小值
+            5). 三个特殊值
+                console.log(Number.MAX_VALUE * 2); // 溢出 Infinity  正无穷大  如果超过了最大值 
+                console.log(-Number.MAX_VALUE * 2); // 溢出 -Infinity  负无穷大  如果超过了最大值
+                console.log('andy' - 10); // NaN  not a  number  不是一个数字
+            6). 检测 是不是数字 
+                isNaN();   返回  ==  做一件事情， 回来告诉我结果   是（true）    不是  （false）
+                console.log(isNaN(12)); // false    isNaN(x)  如果括号里面的是 数值   返回 false
+                console.log(isNaN('andy')); // true    isNaN(x)  如果括号里面的是 不是数值   返回 true
+            7). 小数(浮点数) 不要用浮点数进行计算 
+                console.log(0.1 + 0.2); //0.30000000000000004
+                console.log(0.7* 100);//7.000000000000001 
+                console.log(Number.MAX_VALUE);//1.7976931348623157e+308 js中最大值
+                console.log(Number.MIN_VALUE);//5e-324 js中最小值
+                console.log(Number.MAX_VALUE*2)//溢出Infinity  如果超过了最大值 正无穷大
+                console.log(Number.MIN_VALUE*2)//溢出-Infinity  如果超过了最大值 负无穷大
+            8).检测是不是数字 isNaN() 是返回false 不是返回 true
+                console.log(isNaN(12));//  是数值   返回 false
+                console.log(isNaN("andy"));// 不是数值   返回 true 
+        6. 带有引号的 都是 字符型    js 单引号和双引号是一样的  但是我们更提倡用 单引号
+        1)字符串的长度 
+            var str = '肖申克的救赎'; // 字符串   length 长度 
+            console.log(str.length);
+            var str1 = 'my name is andy';
+            console.log(str1.length);
+        2)字符串的拼接  + 
+            console.log(12 + 12); // 数值型 +  进行加法运算
+            console.log('古丽扎娜' + '迪丽热巴'); // 字符型 相连  连接到一起
+            console.log('pink老师' + 18); // 只有有字符型的 进行了相加   本质 就是相连
+            console.log('pink老师' + 18 + '岁'); //  pink老师18岁   只有有字符型的 进行了相加   本质 就是相连
+            var age = 20;
+            console.log('pink老师' + age + '岁啦'); // 这个重点写法 
+            console.log('100' + 100); // 100100 
+            console.log('100' + '123'); // 100123
+        7. 检测数据类型        
+        1).未定义类型  它声明变量 未给值 就是 未定义数据类型
+            var num;
+            var a = null;
+            console.log(num); //undefined
+            console.log(a); //null
+        2).检测数据类型typeof 
+            var num = 10;
+            console.log(typeof num);//number
+            var str = 'andy';
+            console.log(typeof str);//string        
+            var str1 = '123';
+            console.log(typeof str1);//string
+            var flag = true;
+            console.log(typeof flag);//boolean
+            var unde;
+            console.log(typeof unde);//undefined
+        8.如何转string 类型
+            a.toString();常用
+                var num = 10;
+                num.toString();
+                console.log(num); //数值型的10 chrome浏览器显示为蓝色
+                console.log(num.toString());//字符型的'10' Chrome 显示 黑色
+                console.log(typeof num.toString());//String字符型的 10 Chrome 显示黑色
+                console.log(typeof undefined.toString());//报错
+            b.String() 不常用
+                var a = null;
+                String(a);强制转换 可以转换undefined 和null
+            c.隐式转换 num + '';
+                console.log(10 + '岁');//'10岁' String
+                console.log(10 + '' + 30);//'1030' String 
+        9.转Number
+        parseInt(a) 取整
+        parseFloat(a)保留小数
+        Number(a) 保留小数 但是遇到非数字,返回NaN
+        隐式转换:+a a - 0
+            1).parseInt() 转换数组整型
+                console.log(parseInt('123')); //数值型 123
+                console.log(parseInt('123.65'));//数值型 123 只返回整数 不会四舍五入直接切割
+                console.log(parseInt('123abc')); //123 会把字母去掉
+                console.log(parseInt('asa123add'))//NaN  不是数字型
+            2). parseFloat() 转换为数值型  浮点型
+                console.log(parseFloat('123'));// 数值型123
+                console.log(parseFloat('123.65')); // 数值型的123.65
+                console.log(parseFloat('123abc')); // 数值型的123 把字母去掉
+                console.log(parseFloat('123.65abc')); // 数值型的123.65 把字母去掉
+                console.log(parseFloat('adad65abc')); // NaN 数值型
+            3). Number() 转换为数值型(了解)
+                console.log(Number('123')); //123
+                console.log(Number('123.56')); //123.56
+                console.log(Number('123.56abc')); //NaN
+                console.log(Number(undefined)); //NaN
+                里面只要出现非数学字符或者undefined,则就返回 NaN
+                如果该值时空字符串'' 数字0 null false 返回0 若是true 返回1 
+                console.log(Number(''));//0 Number
+                console.log(Number(null));//0
+                console.log(Number(false));//0 
+                console.log(Number(true));//1 Number 
+            4). 隐式转换 js 算术运算
+                console.log('123' - 0); //123 Number
+                console.log('123' * 1);//123 Number
+                console.log(+'123');//123 Number
+        7.转boolean  
+            方法一:Boolean(a); 方法二: !! 非非
+        0 , NaN , '',undefined, null, false; 转换结果为false
+        其余都为true
+
+        常用的几种输出方式
+        都是window的对象,如window.alert();
+        console.log(); //测试
+        alert(); //警示框
+        prompt(); //输入框
+        document.write();// dom显示
+        console.dir();
+        confirm();带有指定的信息,确定和取消按钮对话框
+        */
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

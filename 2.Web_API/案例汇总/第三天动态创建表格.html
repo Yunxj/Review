@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    #box table {
+      border-collapse: collapse;
+    }
+  </style>
+</head>
+<body>
+  <div id="box"></div>
+  <script>
+    // var s = {name: 'zs', subject: '语文', score: 90};
+    // 模拟数据
+    var datas = [
+      {name: 'zs', subject: '语文', score: 90},
+      {name: 'ls', subject: '数学', score: 80},
+      {name: 'ww', subject: '英语', score: 99},
+      {name: 'zl', subject: '英语', score: 100},
+      {name: 'xs', subject: '英语', score: 60},
+      {name: 'dc', subject: '英语', score: 70}
+    ];
+
+    // 表头数据
+    var headDatas = ['姓名', '科目', '成绩', '操作'];
+
+    // 1 创建table 元素
+    var table = document.createElement('table');
+    document.querySelector('#box').appendChild(table);
+    table.border = '1px';
+    table.width = '400px';
+
+    // 2 创建表头
+    var thead = document.createElement('thead');
+    table.appendChild(thead);
+
+    var tr = document.createElement('tr');
+    thead.appendChild(tr);
+    tr.style.height = '40px';
+    tr.style.backgroundColor = 'lightgray';
+
+    // 遍历头部数据，创建th
+    for (var i = 0; i < headDatas.length; i++) {
+      var th = document.createElement('th');
+      tr.appendChild(th);
+      // th.innerText
+      setInnerText(th, headDatas[i]);
+    }
+    
+    // 3 创建数据行
+    var tbody = document.createElement('tbody');
+    table.appendChild(tbody);
+    tbody.style.textAlign = 'center';
+    for (var i = 0; i < datas.length; i++) {
+      // 一个学生的成绩 {name: 'zl', subject: '英语', score: 100},
+      var data = datas[i];
+      tr = document.createElement('tr');
+      tbody.appendChild(tr);
+
+      // 遍历对象
+      for (var key in data) {
+        var td = document.createElement('td');
+        tr.appendChild(td);
+        setInnerText(td, data[key]);
+      }
+      // 生成删除对应的列
+      td = document.createElement('td');
+      tr.appendChild(td);
+      // 删除的超链接
+      var link = document.createElement('a');
+      td.appendChild(link);
+      link.href = 'javascript:void(0)';
+      setInnerText(link, '删除');
+
+      link.onclick = linkDelete;
+    }
+
+    function linkDelete() {
+      // removeChild()
+      // 获取父元素
+      // 
+      // 获取要删除的行
+      var tr = this.parentNode.parentNode;
+      tbody.removeChild(tr);
+      return false;
+    }
+    // 处理innerText和textContent的兼容性问题
+    // 设置标签之间的内容
+    function setInnerText(element, content) {
+      // 判断当前浏览器是否支持 innerText
+      if (typeof element.innerText === 'string') {
+        element.innerText = content;
+      } else {
+        element.textContent = content;
+      }
+    }
+
+
+
+  </script>
+</body>
+</html>

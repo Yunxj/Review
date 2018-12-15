@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+/*
+    一.jQuery的基本概念
+    jQuery的灵魂 (链式编程,隐式迭代);  入口函数$(function(){});
+    DOM中的顶级对象:docuemnt---页面中的顶级对象
+        docuemnt点出来的是DOM中的属性和方法
+    BOM中的顶级对象:window----浏览器中的顶级对象
+        window点出来的是浏览器中的属性和方法
+        window.document
+    jQuery的顶级对象:jQuery---$
+        $点出来的是jQuery中的方法
+    页面加载事件
+        DOM中的事件           window.onload = function(){};
+        和jQuery中的事件一样   $(window).load(function(){})
+    页面中的基本标签加载完毕
+        $(document).ready(function(){})
+    DOM与jQuery对象相互转换
+        $(DOM的对象)----->jQuery对象
+        1. $('#btn')[0] 伪数组索引为0的
+        2. $('#btn').get(0) 调用get方法传入实参0;
+    二. jQuery中选择器的使用
+        id $("#box"); 类 $(".box"); 标签 $("div");
+        多条件选择器 $("p, div, span, h2");
+        $("#box > p"); 子代 找亲儿子;  $("#box p");后代 找子孙后代;
+        $("#box + p"); box后面的第一个兄弟p标签; box和p是平级;
+        $("#box ~ p"); box后面的所有兄弟p标签;
+        $("*") 通配符 选中页面说要的标签;  $("#dv * ") 找到dv里面的所有标签;
+        $("#uu>li:even"); 奇数;   $("#uu>li:odd"); 数偶;
+        $("#uu>li:gt(4)"); 获取ul中的索引为大于4的所有li标签;
+        $("#uu>li:lt(4)"); 获取ul中的索引为小于4的所有li标签;
+        $("#uu>li:eq(1)"); 获取ul中的索引为1的li
+        $("#uu>li:eq(1)").sibings("li"); 兄弟元素
+        $(this).children("ul"); 儿子
+        .children("p")获取第一层的子元素  小括号里有值 查找当前的那个值, 没有值 所有子元素
+        .find("p");小括号里面的值 你要查找的子元素
+        .siblings();//小括号里没有值  找所有的兄弟元素,  小括号里有值 找当前那个值的兄弟元素
+        $("input[type=button]") 标签属性选择器
+    三. 常见方法
+        .text();  小括号有内容是设置 没有是获取;  js中 innerText;
+        .html();  小括号有内容是设置 没有是获取;       innerHTML;
+        .val();   小括号有内容是设置 没有是获取;  js中 value;
+        .css();   设置样式 .css({"color":"red", "fontWeight: "bold"})
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*/
+
+
+
+
+</script>
+</html>

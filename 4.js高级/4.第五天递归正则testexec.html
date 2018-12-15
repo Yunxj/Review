@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    /*
+    一. 递归 (是一种算法); 概念:在函数内部自己调用自己
+        注意:在递归中一定要有个出口,判断条件
+        找临界点 1 ;
+            if( n ===1 ){
+                return 1;
+            }
+        计算 1 + 2 + ... + n
+        function sum(n){
+            结束条件
+            if(n==1) {
+                return 1;
+            }
+            return n + sum(n - 1);
+        }
+        console.log(sum(20)); 210
+        console.log(sum(3)); 6
+    二. 正则表达式
+        基本元字符  (你要找什么)
+            \d  digital 数字
+            \D          非数字
+            \w  word    数字, 字母, 下划线
+            \W          非数字, 字母 , 下划线
+            \s  space   空格(包括换行)
+            \S          非空格
+            .           任意非换行的字符(包括空格)
+        首尾元字符   (你要从哪里找)
+            ^    以什么开头
+            $    以什么结尾
+        限定元字符    (你要找多少)
+            *   0 ~ 无限次
+            +   1 ~ 无限次
+            ?   0 或 1
+            {n}     n次
+            {n, }   n ~ 无限次
+            {n, m}  n ~ m 次
+        其他元字符
+            []  匹配中括号中的 一个字符
+            [0123456789] --> [0-9] 匹配数字;    [9-0]
+            [a-zA-Z_0-9] --> \w
+        否定元字符
+            [^a-z] 相当于取反
+        转义符
+            获取.   \.
+            获取\   \\
+
+            | 只有一个|表示或者     最低的优先级
+            bayboy
+            ba|oy       b(a|b)y
+            () 分组 提高优先级
+    三. 正则表达式的应用 (RegExp) regularExperssion
+        RegExp.test()   匹配    检测一个字符串是否匹配某个模式
+        RegExp.exec()   用来提取的
+        方法一:
+            var regExp1 = new RegExp("ab[a-z]");
+            var regExp2 = new RegExp("^ab[a-z]$"); 以什么开头和结尾,精确查找
+            var str1 = "deafathehe";
+            var flag1 = regExp1.test(str1); true
+            var flag2 = regExp1.test(str1); false
+        方法二:
+            var regExp3 = /ab[a-z]/i; i 忽略大小写
+            var str2 = 'aaaaab';
+            var flag3 = regExp3.test(str2);  true
+        RegExp.exec()  用来提取, 但只能提取一个 要用到while循环
+            var str = "张三:3000,李四:2222,王五:90000";
+            var reg = /\d+/gi; g (global)全局匹配 有个指针指到下一个, i忽略大小写; 没有g全局匹配时打印的一直是一个数值
+            var arr;
+            var newArr = []
+            while(arr = reg.exec(str)){
+                console.log(arr[0]);
+                newArr[newArr.length] = arr[0];
+            }
+               console.log(newArr); [3000,2222,90000] 
+        表单验证
+            var reg = /^[1-9]\d{4,12}$/  以数字开头和结尾精确查找,数字长度为4到12
+            var reg = /^\w+@\w+(\.\w+)+$/; 邮箱验证
+        String中的match的方法
+            var data = "今天是2018-10-14";
+            var reg = /(\d{4})-(\d{1,2})-(\d{1,2})/;
+            reg.test(data);
+            data.match(reg);
+            console.log(RegExp.$1);//要获取的值在正则表达式中加括号(),用内置方法获取
+            console.log(RegExp.$2);
+            console.log(RegExp.$3);
+    
+    
+    
+    
+    
+    */
+
+
+
+
+</script>
+</html>

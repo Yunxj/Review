@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    /*
+    一. select数据
+    <?php
+        $conn = mysqli_connect("localhost","root","root","student");
+        $sql = "select * from user";
+        $res = mysqli_query($conn,$sql);
+        while($row = mysqli_fetch_assoc($res)){
+          $arr[] = $row;
+        }
+        // var_dump($arr); 查看链接是否成功
+    ?>
+    渲染数据 foreach 遍历数组的方法
+    <?php foreach($arr as $k => $value) :?>
+        <tr>
+          <th scope="row"><?= $k+1?></th>
+          <td><img src="<?= $value["photo"]?>" class="rounded"></td>
+          <td><?= $value["name"]?></td>
+          <td><?= $value["gender"]?></td>
+          <td>
+          <?php $currentTime = time();
+                $brithday = strtotime($value["birthday"]);
+                $age = ceil(($currentTime - $brithday) / (365*24*3600));
+                echo $age;
+          ?></td>
+          <td class="text-center">
+            <!-- 跳转页面时,把id的值也传递过去 -->
+            <a href="edit.php?id=<?= $value["id"]?>" class="btn btn-info btn-sm">编辑</a>
+            <a href="delete.php?id=<?= $value["id"]?>" class="btn btn-danger btn-sm">删除</a>
+          </td>
+        </tr>
+    <?php endforeach; ?>
+    二. 删除功能(获取ID的方式,上个页面的a链接edit.php?id=<?= $value["id"]?)
+    <?php
+        $id = $_GET["id"];
+        $conn = mysqli_connect("localhost","root","root","student");
+        $sql = "delete from user where id = $id";
+        $bool = mysqli_query($conn,$sql);
+        if($bool) {
+            header("location:index.php");
+        }else {
+            echo "删除失败";
+            echo mysqli_error($conn);
+        }
+    ?>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    */
+
+
+
+
+
+
+</script>
+</html>

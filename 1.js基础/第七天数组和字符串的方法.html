@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+<script>
+    /*
+    一.数组 内置对象
+    1)字面量创建函数  [];
+    var arr = [1 ,2 ,3];
+    2)构造函数创建数组
+    var arr = new Array();
+    a. ()括号里为空 创建一个空数组,类似var arr = [];
+    b. (3) 一个值, 数组长度length为3, 里面的元素为空
+    c. (1,2,3)第一个值 ,创建一个[1,2,3]的数组
+    3) instanceof  运算符 判断对象是否是数组   H5中 isArray 
+    var arr = new Array();
+    var obj = {};
+    console.log(arr instanceof Array); true
+    console.log(obj instanceof Array); false
+    console.log(Array.isArray(arr)); true
+    二.数组的方法  (增删改查)
+    数组元素方法的注意点: a.这个方法是否有参数; b.是否改变原来的数组; c.返回值是什么
+    1)  var arr = [1,2];   var arr1 = ['andy']
+        push() arr.push(3) 数组末尾追加1个或多个元素;           有参数 修改原数组 返回新数组的长度
+        pop()  arr.pop()  删除数组最后一个元素;                无参数 修改原数组 返回被删除的元素
+        unshift() arr.unshift(0) 数组前面追加1个或多个数组元素; 有参数 修改原数组 返回新数组的长度
+        shift() arr.shift() 删除数组第一个元素                 无参数 修改原数组 返回被删除的数组元素
+    重点:splice()  删除 插入 替换               有参数 修改原数组 返回删/插/替的数组
+            删除 arr.splice(2,2)   从索引为2(包含2)的后面开始删除2个元素
+                 arr.splice(1)    删除从索引为1的后面所有元素
+            插入 arr.splice(2,0,'哈哈','嘻嘻')   从索引为2前面的位置插入多个元素
+            替换 arr.splice(2,1,'嘿嘿')  把索引为2的元素替换成'嘿嘿'
+        slice() arr.slice(2, 3) [2, 3)  开始能取到 结束取不到  有参数 不修改原数组 返回一个新数组
+        concat() var arr2 = arr.concat(arr1/'andy'); 有参数 不修改原数组 返回合并后的数组
+        reverse() arr.reverse() 翻转数组 无参数 修改原数组 返回翻转后的数组
+        sort() 正确用法要传入函数         有参数 修改原数组 返回排序号的数组
+            arr.sort(function(a,b) {        arr.sort(function(a,b) {
+                return a - b;  升序              return b - a;  降序
+            })                              })
+        indexOf() arr.indexOf('2'); 从左到右默认0(前面开始)默认索引0查询某元素在数组的位置 返回索引号(没有查到返回-1) 只查询第一个后面的不再查  
+            arr.indexOf('2',3); 从索引为3的位置开始查询;
+            反复查询:  var index = arr.indexOf('2');
+                       while(index != -1) {
+                           index = arr.indexOf('2', index + 1);
+                       }
+            案例:去重 
+                var arr = ['c', 'a', 'z', 'a', 'x', 'a', 'x', 'c', 'b'];
+                var newArr = [arr[0]];
+                for (var i = 0; i < arr.length ;i++) {
+                    if (newArr.indexOf(arr[i]) == -1) {
+                        // newArr[newArr.length] = arr[i];
+                        newArr.push(arr[i]);
+                    }
+                }
+                console.log(newArr); 
+        lastIndexOf()从右到左(后面开始)查询某元素在数组的位置 返回索引号 只查询第一个后面的不再查
+        toString() var arr = [1 , 2, 3, 4]   arr.toString()  1,2,3,4,5
+        join() 常用 arr.join() 括号为空等价于toString()是逗号隔开  arr.join('='/'+'-')都可以
+        清空数组的方式 1. arr = []; 2.arr.length = 0; 3. arr.splice(0)
+
+    三. 数据类型内存储存    简单数据类型(值类型) 复杂数据类型(引用类型object array date RgeExp Function)         
+        1. 简单数据类型(栈) number string boolean undefined null(空对象)
+        var a = 10; 变量存的是值 值的形式存在栈里面 互不影响  
+        案例: function fn(x) {
+                x++;
+                console.log(x); 11
+              }    
+              var a = 10;
+              fn(a);
+              console.log(10); 10      
+        2. 复杂数据类型(堆) 基本 new出来的对象 (系统内置对象 Array Math Date )
+        复杂数据类型在存储的是时候 , 是存放在堆里面的  栈里存放的是引用地址
+        在赋值的时候,复杂数据类型是把地址复制一份给对方 
+        function Stars(name,age) {
+            this.name = name;
+            this.age = age;
+        }
+        var star = new Stars('刘德华',18);
+        star 变量存的是地址  同一个地址里面的对象发生变化 会互相影响 
+        案例: function Person(name) {
+                  this.name = name;
+              }
+              function f1(x) {
+                  console.log(x.name); // 2 刘德华 
+                  x.name = '张学友';
+                  console.log(x.name); // 3 张学友  
+              }
+              var p = new Person('刘德华');
+              console.log(p.name); // 1 刘德华
+              f1(p);
+              console.log(p.name);// 4 张学友
+        3.基本包装类型(String/Number/Boolean)  基本不适用 Number 和 Boolean
+    四.字符串  1.特性  不可变性 2.方法 
+        1.特性  var str = 'andy';
+                str = 'red';
+                console.log(str); red 但是 andy一直在内存中 除非关闭当前页面 大量拼接字符串会有性能问题
+        2.方法 indexOf()  charAt() charCodeAt() substr() concat() replace() split() toLowerCase() toUpperCase()
+            indexOf() indexOf(要查找的元素, 查找的起始位置); 和数组的类似 
+                var str = 'oabcoefoxyozzopp';
+                while (index !== -1) {
+                  console.log(index);
+                  index = str.indexOf('o', index + 1);
+                }
+            charAt() 常用 charAt(3)  参数索引号3 返回字符  一次只能查找一个
+                for (var i = 0; i < str.length; i++) {  类似于数组中获取当前的值
+                    console.log(str.charAt(i));
+                }
+            charCodeAt() str.charCodeAt(0) 用于判断用户按了那个键 返回当前字符的ASCII码  一次只能查找一个
+            遍历字符串: for(var i = ;i < str.length; i++) {
+                            console.log(i); 类似于数组
+                        }
+            substr() substr(起始位置, 截取的长度) 截取字符串 返回截取的字符 与数组的spilce类似
+                var str = '我爱中华人民共和国';
+                str.substr(2,2); 截取'中华'             
+            concat() 合并字符串 a.concat(b);
+            replace() 替换 replace(被替换的,要替换的) 一次只能替换一次 while循环添加
+                var str = 'abcoefoxyozzopp';
+                while(str.indexOf('o') != -1) {
+                    str = str.replace('o','!'); abc!ef!xy!zz!pp
+                } 
+            split() 切割字符串 str.split('o') 返回值是数组;    
+                var str = "adosososddozzoll";
+                var arr = str.split('o');以o来分割,相当于变成数组的逗号(,) ["ad", "s", "s", "sdd", "zz", "ll"] 
+                var arr1 = str.split(''); 参数为空字符串 ["a", "d", "o", "s", "o", "s", "o", "s", "d", "d", "o", "z", "z", "o", "l", "l"]                
+                var arr2 = str.split(); 参数为空 ["adosososddozzoll"]
+            toLowerCase(); 转换成小写 var a = 'ABC'; a.toLowerCase(); abc
+            toUpperCase(); 转换成大写 var a = 'abc'; a.toUpperCase(); ABC
+            案例:编写一个函数，将如下字符串'get-element-by-id'修改为驼峰表示法'getElementById'   
+             方法一:    function uppercase(str){
+                            var arr=str.split('')   //先转换为数组
+                            var num=''              //用一个字符串来存储拼接最后的结果，也可以用数组（性能问题）
+                            for(var i=0 ; i<arr.length; i++){
+                                if(arr[i]=='-'){       //当碰到‘-’就把它后面一个元素装换为大写字母
+                                    arr[i+1]=arr[i+1].toUpperCase()     //后面一个元素重新赋值
+                                    continue                              //跳过，不拼接‘-’
+                                }
+                                num+=arr[i]
+                            }
+                            return num              //返回拼接好的字符串
+                        }
+                        var str='get-element-by-id'
+                        console.log(uppercase(str))
+             方法二: var str='get-element-by-id' 
+                    var arr = str.split('-')
+                    var str1 = arr[0];
+                    for(var i =1; i < arr.length; i++) {
+                        str1 +=arr[i].replace(arr[i][0],arr[i][0].toUpperCase())
+                    }
+                    console.log(str1); 
+    五.综合案例 URL ?后面的对象值获取
+            function params(url) {
+            // 1. 我们要得到  name=zs&age=18
+            var arr = url.split('?'); // split 分割字符串 返回的是数组
+            // console.log(arr);
+            var params = arr[1]; // name=zs&age=18
+            // console.log(params);
+            // 2. 我们继续切割  name=zs&age=18  想要得到   name=zs    age=18
+            var arr1 = params.split('&'); //  ["name=zs", "age=18"]
+            // console.log(arr1); 
+            // 3. 因为arr1 里面有多个元素， 都要分别切割，所以我们需要遍历循环
+            var o = {}; // 把分割完毕的 属性和 值 追加到对象里面
+            for (var i = 0; i < arr1.length; i++) {
+                // console.log(arr1[i]);
+                var newArr = arr1[i].split('=');
+                console.log(newArr); //  newArr  里面存储的是  ["name", "zs"]
+                // 我们想要name属性  newArr[0]   我们想要 zs 属性值  newArr[1] 
+                // o.name = zs 
+                o[newArr[0]] = newArr[1];
+            }
+            return o;
+        }
+        console.log(params('http://www.itheima.com/login?name=zs&age=18')); 
+        {name: "zs", age: "18"}        
+    
+    */
+
+
+
+
+
+</script>
+
+</html>

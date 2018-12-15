@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    /*
+    一. 操作样式
+        $("#dv").addClass("cls"); 添加类样式 样式前面没有点(.)
+        $("#dv").removeClass("cls"); 删除类样式
+        $("#dv").toggleClass("cls"); 切换类样式
+        $("#dv").hasClass("cls"); 查询类样式 是否有cls类样式;
+    二. 链式编程(无限点下去)  出现断链是 end() 返回最初的对象
+        通过$("#dv").css("backgroundColor","red").siblings("li").css("backgroundColor","");
+    三. 兄弟选择器
+        $(this).next(); 当前元素的下一个兄弟元素;  $(this).nextAll(); 当前元素后面的所有兄弟元素
+        $(this).prev(); 当前元素的前面一个兄弟元素; $(this).prevAll(); 当前元素前面的所有兄弟元素
+        $(this).sibings();所有的兄弟元素(除了自己)
+    四. 常见的动画
+        $("#dv").hide(1000); 毫秒值 隐藏  $("#dv").show(); 显示  向左上角显示和隐藏 参数 "slow","normal","fast"
+        $(this).children('ul').stop().show(500); 鼠标经过应用
+        $(this).children('ul').stop().hide(500); 鼠标经过应用
+        $("#dv").slideUp(1000); 隐藏 $("#dv").slideDown();显示 
+        $("#dv").slideToggle(); 切换 效果:上下滑进滑出
+        $("#dv").fadeOut(1000); 淡入  $("#dv").fadeOut(1000); 淡出
+        $("#dv").fadeToggle(1000); 切换 ;
+        $("#dv").fadeTo(1000, 0.1); 透明度:最终显示的透明度;
+        $("#dv").animate({
+                            'width': '300px', 'height': '300px'
+                        }, 1000 ,function () {
+                            'width': '100px', 'borderRadius': '50%'
+                        },1000);
+    五. 添加标签  var span = $('<span>哈哈</span>');
+        $("#dv").append(span); 在子元素最前面创建元素; 把元素从这个添加到另一个元素,有点剪切的效果 
+        span.appendTo($("#dv")); 把span对象主动加到div;  
+        $("#dv").html("<p>这是一个p标签</p>"); 把P标签加入到div中   
+        $("#dv").html("");  $("#dv").empty(); 清空元素中的内容
+        $("#dv").remove();  移除元素自身 ---自杀$("#dv").empty();
+        $("#dv").clone(); 克隆         
+        $("#dv").perend(span); 在子元素最后面创建元素
+        $("#dv").after(span); 兄弟的后面创建元素
+        $("#dv").before(span); 兄弟前创建元素
+    六. 获取和设置表单的元素
+        $("#dv").val(); 获取  ---推荐
+        $("#dv").val("active"); 设置
+        $("#dv").text();  获取文本域中的内容,val()获取不到
+        $("#dv").text("哈哈"); 设置
+    七. 自定义属性   var a = $("<a></a>");      
+        a.attr("title", "哈哈"); 两个参数:属性, 属性; 获取和设置固有属性 
+        a.attr("title"); 一个参数 ,获取该元素的属性值
+        $("#dv").prop("checked"); 获取选中状态 prop();获取和设置固有属性
+        $("#dv").prop("checked", false/true); 设置选中状态
+        $("#dv").find(":checkbox"); 父元素调用,查找子代有:checkbox 属性值的元素
+    八. 样式操作
+        $("#dv").width();   $("#dv").height();  内容的宽高;
+        $("#dv").innerWidth();内容 +padding;
+        $("#dv").outerWidth();内容 +padding + border;               
+        $("#dv").outerWidth(true);内容 +padding + border + margin;               
+        $("#dv").left();   $("#dv").top();   
+        $("#dv").scrollLeft(); 滚动出去的距离        
+        $("#dv").scrollTop();         
+
+        
+    案例: 全选反选    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    */
+    
+
+
+</script>
+</html>

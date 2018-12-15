@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    /*
+    常见的DOM操作
+    一. 获取页面元素(标签)
+    document.getElementById(); id获取元素 标签
+    document.getElementByTagName(); 标签获取元素 伪数组
+    document.getElementByClassName(); 类名获取元素 伪数组
+    document.querySelector(); 通过选择器获取元素 标签
+    document.querySelecotrAll(); 通过选择器获取元素 伪数组
+
+    二. 事件  (三要素) 事件源:源头,按钮  事件:点击  事件处理程序:要做的事情
+        onclick  点击 onfocus 获取焦点 onblur 失去焦点 onmouseover 鼠标经过 onmouseout 鼠标离开
+        btn.onclick = function () {
+            if for 等结合处理代码
+        }
+        案例:a.onclick事件:
+                1)简单的隐藏和显示(className = show/hide;style切换)
+                2)value = '显示/隐藏'; var isShow = true;记录状态 方便if(条件的判断)
+            b.美女相册的切换(a链接的href = image的src; p.innertext = a.title)
+    三. 常见的属性
+        表单   type value checked disabled selected
+        非表单  href title src alt
+        公共    id classname style
+        自定义属性  setAttribute() getAttribute() removeAttribute()
+            设置自定义属性
+            box.setAttribute('sex', 'male');
+            box.setAttribute('class', 'test');
+            获取
+            box.getAttribute('age'));
+            box.getAttribute('personId'))
+            移除属性 
+            box.removeAttribute('age');
+            box.removeAttribute('id');
+    四. 获取和设置标签的文本的内容  
+        innerHTML  获取内容时 内容中有标签,会把标签获取并全部返回
+                   p.innerText = 'hello';设置内容时,内容中有标签,会把标签按HTML的方式解析
+        innerText  获取内容时 内容中有标签,会把标签过滤 前后换行 空白 都去掉 
+                   p.textContent = "haha";设置内容时,内容中有标签,会把标签显示出来,不解析
+        textContent  不会理会html格式，直接输出不换行的文本 
+    五. 
+        this指向的问题
+        在函数中,this指的是 window
+        在对象当中,this指的是当前对象
+        在构造函数当中,this指的是由构造函数所创建出来的实例对象
+        在事件处理程序中,this指的是 事件源 当前所绑定的对象
+
+        
+
+        
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    */
+
+
+
+
+</script>
+</html>
