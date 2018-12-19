@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    /*
+    一. 前台页面(用户看到的页面)
+        1.导入文件(封装链接数据库的文件)
+            inculde_once "./common/mysql.php"
+        2.编写sql语句 获取数据
+            $conn = connect()
+            $sql = 'select * from posts as p where p.id = $postId'
+            $list_arr = query($conn, $sql) 返回数据
+        3. 标签中传递参数
+            数据输出的方法
+            <h3><?= $list_arr[0]["name"];?></h3>
+            遍历二维数组  url地址中id传递 
+            <?php foreach($list_arr as $value):?>      
+                <div class="entry">
+                    <div class="head">
+                        <span class="sort"><?= $value["name"];?></span>
+                    a链接的id传递参数下个页面保持数据的链接
+                        <a href="detail.php?postId=<?= $value["id"]?>"><?= $value["title"]?></a>
+
+                    </div>
+                    <div class="main">
+                        <p class="info"><?= $value["nickname"]?> 发表于 <?= $value["created"]?></p>
+                        <p class="brief"><?= $value["content"]?></p>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        4. 模板渲染 art-template 数据信息的渲染
+            <script type="text/template" id="tempCate">
+                {{each data}}
+                    <tr data-categoryId="{{$value.id}}">
+                        <td class="text-center"><input type="checkbox"></td>
+                        <td>{{$value.name}}</td>
+                        <td>{{$value.slug}}</td>
+                        <td>{{$value.classname}}</td>
+                        <td class="text-center">
+                            <a href="javascript:;" data-categoryId="{{$value.id}}" class="btn btn-info btn-xs edit">编辑</a>
+                            <a href="javascript:;" class="btn btn-danger btn-xs del">删除</a>
+                        </td>
+                    </tr>
+                {{/each}}
+            <script>
+            <script>
+                {{if(currentPage - 1)}}  {{/if}}
+            <script>
+
+            $(html).appendTo("tbody", result)
+        5. 多页面渲染数据时,ajax请求接口
+            type:'type', url:'接口',data:{id,页码,条数},dataType:'json'
+        6. 页面布局的框架(
+            bootstrap 公共部分及分页
+            NProgress 页面加载进度条  在页面的头 尾 加script标签NProgress.start() / NProgress.done()
+            )
+    二. 后台页面(编辑人员需要进入的操作页面)
+        1.提取公共部分,include_once "./common/aside.php"
+        2.登录的处理,用户名和密码验证,通过超全局变量$_SESSION,要开启session.start() 
+          登录拦截(封装) <?php
+                            session_start();
+                            if(!$_SESSION["userInfo"]){  //判断当前是否登录正确
+                              header("location:login.php");
+                            }
+                        ?>
+          调用 <?php include_once "../common/checkLogin.php"; ?>
+          登出删除变量 开启session.start() 删除session_destroy();
+        3.PHP接口: 获取页面传递的信息(id,name等),
+                   根据信息结合需要,在数据库中执行响应的(增删改查)语句并返回结果
+                   (select insert update join on order by  asc 升序 desc 降序 limit 0 , 5 )
+        4.主要操作页面的ajax请求
+            发送请求前,匹配用户输入的是否符合要求
+                beforeSend:function(){
+                    var reg = /^\w+[@]\w+[.]\w+$/
+                    reg.test(email)
+                }
+            分页传递参数
+                data:{"currentPage":currentPage,"pageSize":pageSize},
+            event.preventDefault() return false  阻止form表单input属性submit的默认提交
+
+        5.框架ckeditor富文本框
+            //CKEDITOR生成一个div把textarea文本域遮住id=content
+            CKEDITOR.replace(content);
+            //div的值放到textarea文本域中,如何通过form的name获取数据
+            CKEDITOR.instances.connect.updataElement();
+          
+          mditor富文本框  node.js 注册中间件
+        6.用到一些知识点 
+            jquery 选择器 parent() this的指向 常用的一些方法
+            ajax 请求方式 url接口 data数据 dataType:json
+            input标签的属性 name placeholder(文本框默认显示的文字)
+            封装ajax请求
+            a.href  a.hash  location.pathname  处理点击高亮问题
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    */
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</html>
