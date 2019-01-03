@@ -8,3 +8,4 @@
 		流程语句：if for	
 		内置对象：Math
 	PHP服务器脚本语言也是与之类似
+	重点：是js jQuery html css vue 重点学习
